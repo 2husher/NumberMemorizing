@@ -9,19 +9,16 @@ import UIKit
 
 class AllNumbersViewController: UIViewController {
   
-  private var tableView: UITableView!
+  lazy var tableView: UITableView = {
+    let tableView = UITableView(frame: view.frame, style: .plain)
+    tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "Cell")
+    tableView.dataSource = self
+    return tableView
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
      
-    view.backgroundColor = .green
-    configureTableView()
-  }
-  
-  private func configureTableView() {
-    tableView = UITableView(frame: view.frame, style: .plain)
-    tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "Cell")
-    tableView.dataSource = self
     view.addSubview(tableView)
   }
 }
@@ -35,7 +32,7 @@ extension AllNumbersViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     cell.textLabel?.text = "\(indexPath.row)"
     return cell
   }
