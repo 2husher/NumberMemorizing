@@ -39,6 +39,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FAC4B96B29B396B400B90535 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FAC3060C29B2BE05002A7BF9 /* AllNumbersViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FAC4B96C29B396CC00B90535 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FAC4B96929B37FBD00B90535 /* CustomTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FAC4B96D29B396EB00B90535 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FAC62B8C29AF9DC1005D9392 /* Assets.xcassets */,
+				FAC62B8E29AF9DC1005D9392 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		FAC62B7429AF9DC0005D9392 = {
 			isa = PBXGroup;
 			children = (
@@ -60,10 +85,9 @@
 			children = (
 				FAC62B8029AF9DC1005D9392 /* AppDelegate.swift */,
 				FAC62B8229AF9DC1005D9392 /* SceneDelegate.swift */,
-				FAC3060C29B2BE05002A7BF9 /* AllNumbersViewController.swift */,
-				FAC4B96929B37FBD00B90535 /* CustomTableViewCell.swift */,
-				FAC62B8C29AF9DC1005D9392 /* Assets.xcassets */,
-				FAC62B8E29AF9DC1005D9392 /* LaunchScreen.storyboard */,
+				FAC4B96B29B396B400B90535 /* Controllers */,
+				FAC4B96C29B396CC00B90535 /* Views */,
+				FAC4B96D29B396EB00B90535 /* Resources */,
 				FAC62B9129AF9DC1005D9392 /* Info.plist */,
 				FAC62B8929AF9DC1005D9392 /* NumberMemorizing.xcdatamodeld */,
 			);
