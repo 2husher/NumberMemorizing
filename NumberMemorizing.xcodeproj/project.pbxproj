@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FAC3060D29B2BE05002A7BF9 /* AllNumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3060C29B2BE05002A7BF9 /* AllNumbersViewController.swift */; };
 		FAC4B96A29B37FBD00B90535 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4B96929B37FBD00B90535 /* CustomTableViewCell.swift */; };
+		FAC4B96F29B398BA00B90535 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4B96E29B398BA00B90535 /* DetailsViewController.swift */; };
 		FAC62B8129AF9DC1005D9392 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC62B8029AF9DC1005D9392 /* AppDelegate.swift */; };
 		FAC62B8329AF9DC1005D9392 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC62B8229AF9DC1005D9392 /* SceneDelegate.swift */; };
 		FAC62B8B29AF9DC1005D9392 /* NumberMemorizing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAC62B8929AF9DC1005D9392 /* NumberMemorizing.xcdatamodeld */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		FAC3060C29B2BE05002A7BF9 /* AllNumbersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNumbersViewController.swift; sourceTree = "<group>"; };
 		FAC4B96929B37FBD00B90535 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		FAC4B96E29B398BA00B90535 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		FAC62B7D29AF9DC1005D9392 /* NumberMemorizing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumberMemorizing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC62B8029AF9DC1005D9392 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAC62B8229AF9DC1005D9392 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				FAC3060C29B2BE05002A7BF9 /* AllNumbersViewController.swift */,
+				FAC4B96E29B398BA00B90535 /* DetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				FAC62B8329AF9DC1005D9392 /* SceneDelegate.swift in Sources */,
 				FAC62B8B29AF9DC1005D9392 /* NumberMemorizing.xcdatamodeld in Sources */,
 				FAC3060D29B2BE05002A7BF9 /* AllNumbersViewController.swift in Sources */,
+				FAC4B96F29B398BA00B90535 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

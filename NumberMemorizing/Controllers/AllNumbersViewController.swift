@@ -9,10 +9,11 @@ import UIKit
 
 class AllNumbersViewController: UIViewController {
   
-  lazy var tableView: UITableView = {
+  lazy private var tableView: UITableView = {
     let tableView = UITableView(frame: view.frame, style: .plain)
     tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "Cell")
     tableView.dataSource = self
+    tableView.delegate = self
     return tableView
   }()
   
@@ -24,6 +25,11 @@ class AllNumbersViewController: UIViewController {
 }
 
 // MARK: Table View Delegate Methods
+extension AllNumbersViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    navigationController?.pushViewController(DetailsViewController(), animated: true)
+  }
+}
 
 // MARK: Table View Data Source Methods
 extension AllNumbersViewController: UITableViewDataSource {
