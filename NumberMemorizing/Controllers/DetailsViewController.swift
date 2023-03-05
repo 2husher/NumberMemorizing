@@ -10,15 +10,15 @@ import UIKit
 class DetailsViewController: UIViewController {
   
   lazy private var numberLabel: UILabel = {
-    return configLabel(text: "Number")
+    return MyUI.configLabel(text: "Number")
   }()
   
   lazy private var lettersLabel: UILabel = {
-    return configLabel(text: "Letters")
+    return MyUI.configLabel(text: "Letters")
   }()
   
   lazy private var wordLabel: UILabel = {
-    return configLabel(text: "Word")
+    return MyUI.configLabel(text: "Word")
   }()
   
   lazy private var stackView: UIStackView = {
@@ -48,13 +48,5 @@ class DetailsViewController: UIViewController {
 }
 
 extension DetailsViewController {
-  func configLabel(text: String) -> UILabel {
-    let label = UILabel(frame: CGRect.zero)
-    label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 20)
-    label.text = text
-    label.sizeToFit()
-//    label.backgroundColor = .green
-    return label
-  }
+
 }

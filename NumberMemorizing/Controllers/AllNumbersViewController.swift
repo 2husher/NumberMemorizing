@@ -11,7 +11,7 @@ class AllNumbersViewController: UIViewController {
   
   lazy private var tableView: UITableView = {
     let tableView = UITableView(frame: view.frame, style: .plain)
-    tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "Cell")
+    tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: MyConstants.tableViewCellId)
     tableView.dataSource = self
     tableView.delegate = self
     return tableView
@@ -38,7 +38,7 @@ extension AllNumbersViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: MyConstants.tableViewCellId, for: indexPath)
     cell.textLabel?.text = "\(indexPath.row)"
     return cell
   }
