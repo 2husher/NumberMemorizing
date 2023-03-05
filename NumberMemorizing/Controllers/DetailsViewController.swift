@@ -9,16 +9,18 @@ import UIKit
 
 class DetailsViewController: UIViewController {
   
+  var number: Number!
+  
   lazy private var numberLabel: UILabel = {
-    return MyUI.configLabel(text: "Number")
+    return MyUI.configLabel(text: String(number.value))
   }()
   
   lazy private var lettersLabel: UILabel = {
-    return MyUI.configLabel(text: "Letters")
+    return MyUI.configLabel(text: number.letters)
   }()
   
   lazy private var wordLabel: UILabel = {
-    return MyUI.configLabel(text: "Word")
+    return MyUI.configLabel(text: number.word)
   }()
   
   lazy private var stackView: UIStackView = {

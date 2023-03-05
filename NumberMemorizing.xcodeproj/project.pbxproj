@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FAC26BAF29B4D34400223B1A /* MyUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC26BAE29B4D34400223B1A /* MyUI.swift */; };
 		FAC26BB129B4D3CE00223B1A /* MyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC26BB029B4D3CE00223B1A /* MyConstants.swift */; };
+		FAC26BB429B4D55400223B1A /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC26BB329B4D55400223B1A /* Number.swift */; };
 		FAC3060D29B2BE05002A7BF9 /* AllNumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3060C29B2BE05002A7BF9 /* AllNumbersViewController.swift */; };
 		FAC4B96A29B37FBD00B90535 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4B96929B37FBD00B90535 /* CustomTableViewCell.swift */; };
 		FAC4B96F29B398BA00B90535 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4B96E29B398BA00B90535 /* DetailsViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		FAC26BAE29B4D34400223B1A /* MyUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUI.swift; sourceTree = "<group>"; };
 		FAC26BB029B4D3CE00223B1A /* MyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConstants.swift; sourceTree = "<group>"; };
+		FAC26BB329B4D55400223B1A /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		FAC3060C29B2BE05002A7BF9 /* AllNumbersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNumbersViewController.swift; sourceTree = "<group>"; };
 		FAC4B96929B37FBD00B90535 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		FAC4B96E29B398BA00B90535 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +54,14 @@
 				FAC26BB029B4D3CE00223B1A /* MyConstants.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FAC26BB229B4D50600223B1A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FAC26BB329B4D55400223B1A /* Number.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FAC4B96B29B396B400B90535 /* Controllers */ = {
@@ -103,6 +113,7 @@
 				FAC62B8229AF9DC1005D9392 /* SceneDelegate.swift */,
 				FAC4B96B29B396B400B90535 /* Controllers */,
 				FAC4B96C29B396CC00B90535 /* Views */,
+				FAC26BB229B4D50600223B1A /* Models */,
 				FAC4B96D29B396EB00B90535 /* Resources */,
 				FAC26BAD29B4D2BE00223B1A /* Helpers */,
 				FAC62B9129AF9DC1005D9392 /* Info.plist */,
@@ -183,6 +194,7 @@
 			files = (
 				FAC62B8129AF9DC1005D9392 /* AppDelegate.swift in Sources */,
 				FAC4B96A29B37FBD00B90535 /* CustomTableViewCell.swift in Sources */,
+				FAC26BB429B4D55400223B1A /* Number.swift in Sources */,
 				FAC26BAF29B4D34400223B1A /* MyUI.swift in Sources */,
 				FAC62B8329AF9DC1005D9392 /* SceneDelegate.swift in Sources */,
 				FAC62B8B29AF9DC1005D9392 /* NumberMemorizing.xcdatamodeld in Sources */,
