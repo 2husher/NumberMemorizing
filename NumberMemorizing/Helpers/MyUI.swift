@@ -18,4 +18,14 @@ class MyUI {
     //    label.backgroundColor = .green
     return label
   }
+  
+  class func configStackView(arrangedSubviews: [UIView]) -> UIStackView {
+    let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
+    stackView.axis = .vertical
+    stackView.alignment = .fill
+    stackView.distribution = .fill
+    stackView.spacing = 20
+    //    stackView.backgroundColor = .yellow
+    return stackView
+  }
 }

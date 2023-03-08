@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Number {
+struct Number: Equatable {
   var value: Int
   var letters: String
   var word: String

@@ -24,19 +24,13 @@ class DetailsViewController: UIViewController {
   }()
   
   lazy private var stackView: UIStackView = {
-    let stackView = UIStackView(arrangedSubviews: [numberLabel, lettersLabel, wordLabel])
-    stackView.axis = .vertical
-    stackView.alignment = .fill
-    stackView.distribution = .fill
-    stackView.spacing = 20
-//    stackView.backgroundColor = .yellow
-    return stackView
+    return MyUI.configStackView(arrangedSubviews: [numberLabel, lettersLabel, wordLabel])
   }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Details"
+    navigationItem.title = "Details"
     view.backgroundColor = .white
     view.addSubview(stackView)
     
