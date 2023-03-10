@@ -23,8 +23,12 @@ class DetailsViewController: UIViewController {
     return MyUI.configLabel(text: number.word)
   }()
   
+  lazy private var imageView: UIImageView = {
+    return MyUI.configImageView(imageName: "default")
+  }()
+  
   lazy private var stackView: UIStackView = {
-    return MyUI.configStackView(arrangedSubviews: [numberLabel, lettersLabel, wordLabel])
+    return MyUI.configStackView(arrangedSubviews: [numberLabel, lettersLabel, wordLabel, imageView])
   }()
   
   override func viewDidLoad() {
@@ -37,8 +41,9 @@ class DetailsViewController: UIViewController {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-      stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-      stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+      stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 20),
+      stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20),
+      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
     ])
   }
 }

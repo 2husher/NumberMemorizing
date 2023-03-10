@@ -26,6 +26,8 @@ class AllNumbersViewController: UIViewController {
     
     navigationItem.title = "Numbers"
     navigationItem.leftBarButtonItem = editButtonItem
+    
+    tableView.rowHeight = 55
   }
   
   override func setEditing(_ editing: Bool, animated: Bool) {
@@ -81,5 +83,9 @@ extension AllNumbersViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     numbersPool.moveNumber(from: sourceIndexPath.row, to: destinationIndexPath.row)
+  }
+  
+  func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+    "Remove"
   }
 }
