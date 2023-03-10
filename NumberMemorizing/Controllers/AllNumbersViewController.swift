@@ -59,8 +59,23 @@ extension AllNumbersViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let number = numbersPool.number(at: indexPath.row)
-      numbersPool.removeNumber(number)
-      tableView.deleteRows(at: [indexPath], with: .automatic)
+      
+      let alertController = {
+        let title = "Delete \(number.value)"
+        let message = "Are you sure you want to delete this number?"
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        ac.addAction(cancelAction)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
+          self.numbersPool.removeNumber(number)
+          self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        })
+        ac.addAction(deleteAction)
+        return ac
+      }()
+      present(alertController, animated: true)
     }
   }
   
