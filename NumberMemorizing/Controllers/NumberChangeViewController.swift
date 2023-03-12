@@ -53,7 +53,7 @@ class NumberChangeViewController: UIViewController {
   
   // MARK: - Helper Methods
   @objc private func cancel() {
-    print(#function)
+    dismiss(animated: true)
   }
  
   @objc private func createNumber() {
