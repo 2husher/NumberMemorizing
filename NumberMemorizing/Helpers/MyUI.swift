@@ -19,6 +19,12 @@ class MyUI {
     return label
   }
   
+  class func configTextField(placeholder: String) -> UITextField {
+    let textField = UITextField()
+    textField.placeholder = placeholder
+    return textField
+  }
+  
   class func configStackView(arrangedSubviews: [UIView]) -> UIStackView {
     let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
     stackView.axis = .vertical
