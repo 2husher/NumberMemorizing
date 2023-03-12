@@ -19,9 +19,12 @@ class MyUI {
     return label
   }
   
-  class func configTextField(placeholder: String) -> UITextField {
+  class func configTextField(placeholder: String = "", text: String = "") -> UITextField {
     let textField = UITextField()
     textField.placeholder = placeholder
+    textField.text = text
+    textField.textAlignment = .center
+    textField.borderStyle = .roundedRect
     return textField
   }
   
