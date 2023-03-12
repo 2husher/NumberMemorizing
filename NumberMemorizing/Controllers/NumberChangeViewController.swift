@@ -11,12 +11,20 @@ class NumberChangeViewController: UIViewController {
   
   var number: Number!
   
-  lazy private var numberLabel: UILabel = {
-    return MyUI.configLabel(text: "Number")
+  lazy private var numberTextField: UITextField = {
+    return MyUI.configTextField(placeholder: "Enter a new number")
+  }()
+  
+  lazy private var lettersTextField: UITextField = {
+    return MyUI.configTextField(placeholder: "Enter the letters")
+  }()
+  
+  lazy private var wordTextField: UITextField = {
+    return MyUI.configTextField(placeholder: "Enter the word")
   }()
   
   lazy private var stackView: UIStackView = {
-    return MyUI.configStackView(arrangedSubviews: [numberLabel, imageView])
+    return MyUI.configStackView(arrangedSubviews: [numberTextField, lettersTextField, wordTextField, imageView])
   }()
   
   lazy private var imageView: UIImageView = {
