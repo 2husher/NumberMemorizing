@@ -26,13 +26,22 @@ class AllNumbersViewController: UIViewController {
     
     navigationItem.title = "Numbers"
     navigationItem.leftBarButtonItem = editButtonItem
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewNumber))
     
     tableView.rowHeight = 55
   }
   
+  // MARK: - Helper Methods
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
     tableView.setEditing(editing, animated: animated)
+  }
+  
+  @objc private func createNewNumber() {
+    print(#function)
+    let changeVC = NumberChangeViewController()
+    let changeNavC = UINavigationController(rootViewController: changeVC)
+    present(changeNavC, animated: true)
   }
 }
 
