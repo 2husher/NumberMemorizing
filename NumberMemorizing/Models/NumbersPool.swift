@@ -40,4 +40,8 @@ struct NumbersPool {
     numbers.remove(at: sourceIndex)
     numbers.insert(number, at: destIndex)
   }
+  
+  mutating func addNumber(_ number: Number) {
+    numbers.append(number)
+  }
 }

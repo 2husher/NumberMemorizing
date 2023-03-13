@@ -18,6 +18,7 @@ class AllNumbersViewController: UIViewController {
   }()
   
   var numbersPool = NumbersPool()
+  var number = Number()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,6 +42,8 @@ class AllNumbersViewController: UIViewController {
     print(#function)
     let changeVC = NumberChangeViewController()
     let changeNavC = UINavigationController(rootViewController: changeVC)
+    changeVC.number = number
+    changeVC.delegate = self
     present(changeNavC, animated: true)
   }
 }
@@ -96,5 +99,14 @@ extension AllNumbersViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
     "Remove"
+  }
+}
+
+// MARK: - Number Change View Delegate Methods
+extension AllNumbersViewController: NumberChangeViewDelegate {
+  func updateView() {
+    numbersPool.addNumber(number)
+    print(#function, number)
+    tableView.reloadData()
   }
 }

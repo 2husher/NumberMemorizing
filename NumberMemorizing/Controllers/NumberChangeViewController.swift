@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol NumberChangeViewDelegate {
+  func updateView()
+}
+
 class NumberChangeViewController: UIViewController {
   
   var number: Number!
+  var delegate: NumberChangeViewDelegate?
   
   lazy private var numberTextField: UITextField = {
     return MyUI.configTextField(placeholder: "Enter a new number")
@@ -57,6 +62,13 @@ class NumberChangeViewController: UIViewController {
   }
  
   @objc private func createNumber() {
-    print(#function)
+    if !numberTextField.text!.isEmpty && !lettersTextField.text!.isEmpty && !wordTextField.text!.isEmpty {
+      number.value = Int(numberTextField.text!)!
+      number.letters = lettersTextField.text!
+      number.word = wordTextField.text!
+//      print(#function, number)
+      delegate?.updateView()
+    }
+    dismiss(animated: true)
    }
 }
