@@ -36,6 +36,9 @@ class DetailsViewController: UIViewController {
     
     navigationItem.title = "Details"
     view.backgroundColor = .white
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editNumber))
+
     view.addSubview(stackView)
     
     stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +48,11 @@ class DetailsViewController: UIViewController {
       stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20),
       imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
     ])
+  }
+  
+  // MARK: - Helper Methods
+  @objc private func editNumber() {
+    print(#function)
   }
 }
 
