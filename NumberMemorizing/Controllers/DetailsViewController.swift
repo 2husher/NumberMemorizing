@@ -9,27 +9,32 @@ import UIKit
 
 class DetailsViewController: UIViewController {
   
-  var number: Number!
+  var number: Number! {
+    didSet {
+      updateView()
+    }
+  }
   
-  lazy private var numberLabel: UILabel = {
-    return MyUI.configLabel(text: String(number.value))
-  }()
+//  private var numberLabel: UILabel!
+//  private var lettersLabel: UILabel!
+//  private var wordLabel: UILabel!
   
-  lazy private var lettersLabel: UILabel = {
-    return MyUI.configLabel(text: number.letters)
-  }()
+  private var numberLabel: UILabel!
+//    return
+
+  private var lettersLabel: UILabel!
+//    return
+
+  private var wordLabel: UILabel!
+//    return
   
-  lazy private var wordLabel: UILabel = {
-    return MyUI.configLabel(text: number.word)
-  }()
+  private var imageView: UIImageView!
   
-  lazy private var imageView: UIImageView = {
-    return MyUI.configImageView(imageName: "default")
-  }()
-  
-  lazy private var stackView: UIStackView = {
-    return MyUI.configStackView(arrangedSubviews: [numberLabel, lettersLabel, wordLabel, imageView])
-  }()
+  private var stackView: UIStackView!
+
+    //  override func viewWillAppear(_ animated: Bool) {
+//    numberLabel = MyUI.configLabel(text: String(number.value))
+//  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,6 +44,29 @@ class DetailsViewController: UIViewController {
     
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editNumber))
 
+    configView()
+    updateView()
+  }
+  
+  // MARK: - Helper Methods
+  @objc private func editNumber() {
+    print(#function)
+    let changeVC = NumberChangeViewController()
+    let changeNavC = UINavigationController(rootViewController: changeVC)
+    changeVC.number = number
+    changeVC.delegate = self
+    present(changeNavC, animated: true)
+    changeVC.modalPresentationStyle = .fullScreen
+  }
+  
+  func configView() {
+    numberLabel = MyUI.configLabel(text: String(number.value))
+    lettersLabel = MyUI.configLabel(text: number.letters)
+    wordLabel = MyUI.configLabel(text: number.word)
+    imageView = MyUI.configImageView(imageName: "default")
+    
+    stackView = MyUI.configStackView(arrangedSubviews: [numberLabel, lettersLabel, wordLabel, imageView])
+    
     view.addSubview(stackView)
     
     stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,12 +78,20 @@ class DetailsViewController: UIViewController {
     ])
   }
   
-  // MARK: - Helper Methods
-  @objc private func editNumber() {
-    print(#function)
+  func updateView() {
+    guard numberLabel != nil else { return }
+    guard lettersLabel != nil else { return }
+    guard wordLabel != nil else { return }
+    
+    numberLabel.text = String(number.value)
+    lettersLabel.text = number.letters
+    wordLabel.text = number.word
   }
 }
 
-extension DetailsViewController {
-
+extension DetailsViewController: NumberChangeViewDelegate {
+  func update(number: Number) {
+    print(#function)
+    self.number = number    
+  }
 }

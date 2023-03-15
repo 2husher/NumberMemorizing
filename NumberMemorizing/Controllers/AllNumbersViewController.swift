@@ -17,8 +17,8 @@ class AllNumbersViewController: UIViewController {
     return tableView
   }()
   
-  var numbersPool = NumbersPool()
-  var number = Number()
+  var numbersPool = NumbersPool() 
+  var number: Number?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,6 +30,11 @@ class AllNumbersViewController: UIViewController {
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewNumber))
     
     tableView.rowHeight = 55
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    tableView.reloadData()
   }
   
   // MARK: - Helper Methods
@@ -60,6 +65,7 @@ extension AllNumbersViewController: UITableViewDelegate {
 // MARK: Table View Data Source Methods
 extension AllNumbersViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    print(#function, numbersPool.count)
     return numbersPool.count
   }
   
@@ -84,7 +90,10 @@ extension AllNumbersViewController: UITableViewDataSource {
         
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
           self.numbersPool.removeNumber(number)
+//          print(#function, self.tableView.numberOfRows(inSection: 0))
           self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//          print(#function, self.tableView.numberOfRows(inSection: 0))
+//          self.tableView.reloadData()
         })
         ac.addAction(deleteAction)
         return ac
@@ -104,9 +113,8 @@ extension AllNumbersViewController: UITableViewDataSource {
 
 // MARK: - Number Change View Delegate Methods
 extension AllNumbersViewController: NumberChangeViewDelegate {
-  func updateView() {
+  func update(number: Number) {
     numbersPool.addNumber(number)
-    print(#function, number)
     tableView.reloadData()
   }
 }

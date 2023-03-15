@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NumbersPool {
+class NumbersPool {
   private var numbers: [Number] = []
   
   var count: Int {
@@ -24,14 +24,14 @@ struct NumbersPool {
     return numbers[index]
   }
   
-  mutating func removeNumber(_ number: Number) {
+  func removeNumber(_ number: Number) {
     let index = numbers.firstIndex(of: number)
     if let index = index {
       numbers.remove(at: index)
     }
   }
   
-  mutating func moveNumber(from sourceIndex: Int, to destIndex: Int) {
+  func moveNumber(from sourceIndex: Int, to destIndex: Int) {
     if sourceIndex == destIndex {
       return
     }
@@ -41,7 +41,7 @@ struct NumbersPool {
     numbers.insert(number, at: destIndex)
   }
   
-  mutating func addNumber(_ number: Number) {
+  func addNumber(_ number: Number) {
     numbers.append(number)
   }
 }

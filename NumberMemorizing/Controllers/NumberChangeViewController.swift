@@ -8,12 +8,12 @@
 import UIKit
 
 protocol NumberChangeViewDelegate {
-  func updateView()
+  func update(number: Number)
 }
 
 class NumberChangeViewController: UIViewController {
   
-  var number: Number!
+  var number: Number?
   var delegate: NumberChangeViewDelegate?
   
   lazy private var numberTextField: UITextField = {
@@ -39,11 +39,22 @@ class NumberChangeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    if let number = number {
+      numberTextField.text = String(number.value)
+      lettersTextField.text = number.letters
+      wordTextField.text = number.word
+    }
+    
     view.backgroundColor = .white
     
-    navigationItem.title = "Create Number"
+    if number == nil {
+      navigationItem.title = "Create Number"
+    }
+    else {
+      navigationItem.title = "Edit Number"
+    }
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createNumber))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(changeNumber))
     
     view.addSubview(stackView)
     
@@ -61,14 +72,25 @@ class NumberChangeViewController: UIViewController {
     dismiss(animated: true)
   }
  
-  @objc private func createNumber() {
-    if !numberTextField.text!.isEmpty && !lettersTextField.text!.isEmpty && !wordTextField.text!.isEmpty {
-      number.value = Int(numberTextField.text!)!
-      number.letters = lettersTextField.text!
-      number.word = wordTextField.text!
-//      print(#function, number)
-      delegate?.updateView()
+  @objc private func changeNumber() {
+    let numberText = numberTextField.text!
+    let lettersText = lettersTextField.text!
+    let wordText = wordTextField.text!
+    
+    guard !numberText.isEmpty else { return }
+    guard let numberValue = Int(numberText) else { return }
+    guard !lettersText.isEmpty else { return }
+    guard !wordText.isEmpty else { return }
+    
+    if number != nil {
+      number!.value = numberValue
+      number!.letters = lettersText
+      number!.word = wordText
     }
+    else {
+      number = Number(value: numberValue, letters: lettersText, word: wordText)
+    }
+    delegate?.update(number: number!)
     dismiss(animated: true)
    }
 }
