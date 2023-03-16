@@ -39,6 +39,16 @@ class NumberChangeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    configView()
+  }
+   
+  
+  // MARK: - Helper Methods
+  @objc private func cancel() {
+    dismiss(animated: true)
+  }
+  
+  private func configView() {
     if let number = number {
       numberTextField.text = String(number.value)
       lettersTextField.text = number.letters
@@ -65,11 +75,6 @@ class NumberChangeViewController: UIViewController {
       stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20),
       imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
     ])
-  }
-  
-  // MARK: - Helper Methods
-  @objc private func cancel() {
-    dismiss(animated: true)
   }
  
   @objc private func changeNumber() {
