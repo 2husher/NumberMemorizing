@@ -14,28 +14,13 @@ class DetailsViewController: UIViewController {
       updateView()
     }
   }
-  
-//  private var numberLabel: UILabel!
-//  private var lettersLabel: UILabel!
-//  private var wordLabel: UILabel!
-  
+
   private var numberLabel: UILabel!
-//    return
-
   private var lettersLabel: UILabel!
-//    return
-
   private var wordLabel: UILabel!
-//    return
-  
   private var imageView: UIImageView!
-  
   private var stackView: UIStackView!
 
-    //  override func viewWillAppear(_ animated: Bool) {
-//    numberLabel = MyUI.configLabel(text: String(number.value))
-//  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -50,7 +35,6 @@ class DetailsViewController: UIViewController {
   
   // MARK: - Helper Methods
   @objc private func editNumber() {
-    print(#function)
     let changeVC = NumberChangeViewController()
     let changeNavC = UINavigationController(rootViewController: changeVC)
     changeVC.number = number
@@ -91,7 +75,6 @@ class DetailsViewController: UIViewController {
 
 extension DetailsViewController: NumberChangeViewDelegate {
   func update(number: Number) {
-    print(#function)
     self.number = number    
   }
 }

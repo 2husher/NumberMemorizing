@@ -44,7 +44,6 @@ class AllNumbersViewController: UIViewController {
   }
   
   @objc private func createNewNumber() {
-    print(#function)
     let changeVC = NumberChangeViewController()
     let changeNavC = UINavigationController(rootViewController: changeVC)
     changeVC.number = number
@@ -65,7 +64,6 @@ extension AllNumbersViewController: UITableViewDelegate {
 // MARK: Table View Data Source Methods
 extension AllNumbersViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    print(#function, numbersPool.count)
     return numbersPool.count
   }
   
@@ -90,10 +88,7 @@ extension AllNumbersViewController: UITableViewDataSource {
         
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
           self.numbersPool.removeNumber(number)
-//          print(#function, self.tableView.numberOfRows(inSection: 0))
           self.tableView.deleteRows(at: [indexPath], with: .automatic)
-//          print(#function, self.tableView.numberOfRows(inSection: 0))
-//          self.tableView.reloadData()
         })
         ac.addAction(deleteAction)
         return ac
