@@ -68,9 +68,11 @@ extension AllNumbersViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: MyConstants.tableViewCellId, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: MyConstants.tableViewCellId, for: indexPath) as! CustomTableViewCell
     let number = numbersPool.number(at: indexPath.row)
-    cell.textLabel?.text = "\(number.value) - \(number.letters) - \(number.word)"
+    cell.numberLabel.text = String(number.value)
+    cell.wordLabel.text = String(number.word)
+    cell.customImageView.image = UIImage(named: "square")
     return cell
   }
   
