@@ -15,12 +15,26 @@ class DetailsViewController: UIViewController {
     }
   }
 
-  private var numberLabel: UILabel!
-  private var lettersLabel: UILabel!
-  private var wordLabel: UILabel!
-  private var imageView: UIImageView!
-  private var stackView: UIStackView!
+  lazy private var numberLabel: UILabel! = {
+    MyUI.configLabel(text: String(number.value))
+  }()
 
+  lazy private var lettersLabel: UILabel! = {
+    MyUI.configLabel(text: number.letters)
+  }()
+ 
+  lazy private var wordLabel: UILabel! = {
+    MyUI.configLabel(text: number.word)
+  }()
+
+  lazy private var imageView: UIImageView! = {
+    MyUI.configImageView(imageName: "default")
+  }()
+
+  lazy private var stackView: UIStackView! = {
+     MyUI.configStackView(arrangedSubviews: [numberLabel, lettersLabel, wordLabel, imageView])
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -44,13 +58,6 @@ class DetailsViewController: UIViewController {
   }
   
   func configView() {
-    numberLabel = MyUI.configLabel(text: String(number.value))
-    lettersLabel = MyUI.configLabel(text: number.letters)
-    wordLabel = MyUI.configLabel(text: number.word)
-    imageView = MyUI.configImageView(imageName: "default")
-    
-    stackView = MyUI.configStackView(arrangedSubviews: [numberLabel, lettersLabel, wordLabel, imageView])
-    
     view.addSubview(stackView)
     
     stackView.translatesAutoresizingMaskIntoConstraints = false
