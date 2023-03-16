@@ -17,23 +17,23 @@ class NumberChangeViewController: UIViewController {
   var delegate: NumberChangeViewDelegate?
   
   lazy private var numberTextField: UITextField = {
-    return MyUI.configTextField(placeholder: "Enter a new number")
+    MyUI.configTextField(placeholder: "Enter a new number")
   }()
   
   lazy private var lettersTextField: UITextField = {
-    return MyUI.configTextField(placeholder: "Enter the letters")
+    MyUI.configTextField(placeholder: "Enter the letters")
   }()
   
   lazy private var wordTextField: UITextField = {
-    return MyUI.configTextField(placeholder: "Enter the word")
+    MyUI.configTextField(placeholder: "Enter the word")
   }()
   
   lazy private var stackView: UIStackView = {
-    return MyUI.configStackView(arrangedSubviews: [numberTextField, lettersTextField, wordTextField, imageView])
+    MyUI.configStackView(arrangedSubviews: [numberTextField, lettersTextField, wordTextField, imageView])
   }()
   
   lazy private var imageView: UIImageView = {
-    return MyUI.configImageView(imageName: "default")
+    MyUI.configImageView(imageName: "default")
   }()
   
   override func viewDidLoad() {
