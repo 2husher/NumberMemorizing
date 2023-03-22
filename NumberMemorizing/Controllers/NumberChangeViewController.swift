@@ -55,6 +55,7 @@ class NumberChangeViewController: UIViewController {
   
   // MARK: - Helper Methods
   @objc private func cancel() {
+    view.endEditing(true)
     dismiss(animated: true)
   }
   
@@ -108,6 +109,7 @@ class NumberChangeViewController: UIViewController {
       number = Number(value: numberValue, letters: lettersText, word: wordText)
     }
     delegate?.update(number: number!)
+    view.endEditing(true)
     dismiss(animated: true)
    }
   
