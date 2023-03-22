@@ -112,7 +112,8 @@ class NumberChangeViewController: UIViewController {
    }
   
   @objc private func dismissKeyboard() {
-    stackView.arrangedSubviews.forEach { if $0.isFirstResponder { $0.resignFirstResponder() } }
+//    stackView.arrangedSubviews.forEach { if $0.isFirstResponder { $0.resignFirstResponder() } }
+    view.endEditing(true)
   }
 }
 
