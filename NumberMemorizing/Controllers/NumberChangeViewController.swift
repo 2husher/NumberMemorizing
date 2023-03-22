@@ -46,6 +46,18 @@ class NumberChangeViewController: UIViewController {
     MyUI.configTapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
   }()
   
+  lazy private var myNavigationItem: UINavigationItem = {
+    if number == nil {
+      navigationItem.title = "Create Number"
+    }
+    else {
+      navigationItem.title = "Edit Number"
+    }
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(changeNumber))
+    return navigationItem
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -70,14 +82,8 @@ class NumberChangeViewController: UIViewController {
     
     view.addGestureRecognizer(tapGestureRecognizer)
     
-    if number == nil {
-      navigationItem.title = "Create Number"
-    }
-    else {
-      navigationItem.title = "Edit Number"
-    }
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(changeNumber))
+        
+    _ = myNavigationItem.title
     
     view.addSubview(stackView)
     
