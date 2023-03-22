@@ -45,4 +45,11 @@ class MyUI {
     imageView.contentMode = .scaleAspectFit
     return imageView
   }
+  
+  class func configTapGestureRecognizer(target: Any?, action: Selector?) -> UITapGestureRecognizer {
+    let tapGestureRecognizer = UITapGestureRecognizer(target: target, action: action)
+    tapGestureRecognizer.numberOfTapsRequired = 1
+    tapGestureRecognizer.numberOfTouchesRequired = 1
+    return tapGestureRecognizer
+  }
 }

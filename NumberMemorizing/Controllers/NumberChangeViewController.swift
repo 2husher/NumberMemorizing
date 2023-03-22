@@ -36,6 +36,10 @@ class NumberChangeViewController: UIViewController {
     MyUI.configImageView(imageName: "default")
   }()
   
+  lazy private var tapGestureRecognizer: UITapGestureRecognizer = {
+    MyUI.configTapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -56,6 +60,8 @@ class NumberChangeViewController: UIViewController {
     }
     
     view.backgroundColor = .white
+    
+    view.addGestureRecognizer(tapGestureRecognizer)
     
     if number == nil {
       navigationItem.title = "Create Number"
@@ -98,4 +104,8 @@ class NumberChangeViewController: UIViewController {
     delegate?.update(number: number!)
     dismiss(animated: true)
    }
+  
+  @objc private func dismissKeyboard() {
+    print(#function)
+  }
 }
