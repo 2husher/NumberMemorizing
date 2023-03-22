@@ -17,15 +17,21 @@ class NumberChangeViewController: UIViewController {
   var delegate: NumberChangeViewDelegate?
   
   lazy private var numberTextField: UITextField = {
-    MyUI.configTextField(placeholder: "Enter a new number")
+    let numberTextField = MyUI.configTextField(placeholder: "Enter a new number")
+    numberTextField.delegate = self
+    return numberTextField
   }()
   
   lazy private var lettersTextField: UITextField = {
-    MyUI.configTextField(placeholder: "Enter the letters")
+    let lettersTextField = MyUI.configTextField(placeholder: "Enter the letters")
+    lettersTextField.delegate = self
+    return lettersTextField
   }()
   
   lazy private var wordTextField: UITextField = {
-    MyUI.configTextField(placeholder: "Enter the word")
+    let wordTextField = MyUI.configTextField(placeholder: "Enter the word")
+    wordTextField.delegate = self
+    return wordTextField
   }()
   
   lazy private var stackView: UIStackView = {
@@ -107,5 +113,12 @@ class NumberChangeViewController: UIViewController {
   
   @objc private func dismissKeyboard() {
     stackView.arrangedSubviews.forEach { if $0.isFirstResponder { $0.resignFirstResponder() } }
+  }
+}
+
+// MARK: - TextField Delegate Methods
+extension NumberChangeViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
   }
 }
