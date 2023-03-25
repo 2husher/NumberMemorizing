@@ -46,6 +46,8 @@ class NumberChangeViewController: UIViewController {
     MyUI.configTapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
   }()
   
+  var textFields = [UITextField]()
+  
   lazy private var myNavigationItem: UINavigationItem = {
     if number == nil {
       navigationItem.title = "Create Number"
@@ -55,6 +57,7 @@ class NumberChangeViewController: UIViewController {
     }
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(changeNumber))
+    navigationItem.rightBarButtonItem?.isEnabled = false
     return navigationItem
   }()
   
@@ -77,6 +80,11 @@ class NumberChangeViewController: UIViewController {
       lettersTextField.text = number.letters
       wordTextField.text = number.word
     }
+    
+    textFields.append(numberTextField)
+    textFields.append(lettersTextField)
+    textFields.append(wordTextField)
+    textFields.forEach { $0.clearButtonMode = .whileEditing }
     
     view.backgroundColor = .white
     
@@ -129,5 +137,25 @@ class NumberChangeViewController: UIViewController {
 extension NumberChangeViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
+  }
+  
+  func textFieldShouldClear(_ textField: UITextField) -> Bool {
+    myNavigationItem.rightBarButtonItem?.isEnabled = false
+    return true
+  }
+  
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let oldText = textField.text!
+    let newText = oldText.replacingCharacters(in: Range(range, in: oldText)!, with: string)
+    let allTextFieldFilled = { () -> Bool in
+      for field in self.textFields {
+        if textField != field && field.text!.isEmpty {
+          return false
+        }
+      }
+      return true
+    }
+    myNavigationItem.rightBarButtonItem?.isEnabled = allTextFieldFilled() && !newText.isEmpty
+    return true
   }
 }
