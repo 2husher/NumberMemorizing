@@ -8,18 +8,12 @@
 import Foundation
 
 class NumbersPool {
-  private var numbers: [Number] = []
+  var numbers: [Number] = []
   
   var count: Int {
     return numbers.count
   }
-  
-  init() {
-    for i in 1...20 {
-      numbers.append(Number(value: i, letters: "ББ", word: "АББА"))
-    }
-  }
-  
+
   func number(at index: Int) -> Number {
     return numbers[index]
   }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Number: Equatable {
+class Number: Equatable, Codable {
   static func == (lhs: Number, rhs: Number) -> Bool {
     lhs.value == rhs.value
   }

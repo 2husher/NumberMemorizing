@@ -17,6 +17,15 @@ class AllNumbersViewController: UIViewController {
     return tableView
   }()
   
+  lazy private var documentDirectory: URL = {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+  }()
+  
+  lazy private var dataFilePath: URL = {
+    documentDirectory.appendingPathExtension("Numbers.plist")
+  }()
+  
   var numbersPool = NumbersPool() 
   var number: Number?
   
@@ -30,6 +39,8 @@ class AllNumbersViewController: UIViewController {
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewNumber))
     
     tableView.rowHeight = 55
+    
+    loadNumbers()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +60,30 @@ class AllNumbersViewController: UIViewController {
     changeVC.number = number
     changeVC.delegate = self
     present(changeNavC, animated: true)
+  }
+  
+  func saveNumbers() {
+    print(dataFilePath)
+    let encoder = PropertyListEncoder()
+    do {
+      let data = try encoder.encode(numbersPool.numbers)
+      try data.write(to: dataFilePath, options: Data.WritingOptions.atomic)
+    }
+    catch {
+      print("Error encoding numbers array: \(error.localizedDescription)")
+    }
+  }
+  
+  func loadNumbers() {
+    if let data = try? Data(contentsOf: dataFilePath) {
+      let decoder = PropertyListDecoder()
+      do {
+        numbersPool.numbers = try decoder.decode([Number].self, from: data)
+      }
+      catch {
+        print("Error decoding numbers array: \(error.localizedDescription)")
+      }
+    }
   }
 }
 
@@ -91,6 +126,7 @@ extension AllNumbersViewController: UITableViewDataSource {
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
           self.numbersPool.removeNumber(number)
           self.tableView.deleteRows(at: [indexPath], with: .automatic)
+          self.saveNumbers()
         })
         ac.addAction(deleteAction)
         return ac
@@ -101,6 +137,7 @@ extension AllNumbersViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     numbersPool.moveNumber(from: sourceIndexPath.row, to: destinationIndexPath.row)
+    saveNumbers()
   }
   
   func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
@@ -113,5 +150,6 @@ extension AllNumbersViewController: NumberChangeViewDelegate {
   func update(number: Number) {
     numbersPool.addNumber(number)
     tableView.reloadData()
+    saveNumbers()
   }
 }
