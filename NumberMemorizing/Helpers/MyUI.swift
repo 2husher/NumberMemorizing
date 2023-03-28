@@ -41,8 +41,9 @@ class MyUI {
   class func configImageView(imageName name: String) -> UIImageView {
     let image = UIImage(named: name)
     let imageView = UIImageView(image: image)
-    imageView.backgroundColor = .red
-    imageView.contentMode = .scaleAspectFit
+//    imageView.backgroundColor = .red
+    imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
     return imageView
   }
   
