@@ -17,15 +17,6 @@ class AllNumbersViewController: UIViewController {
     return tableView
   }()
   
-  lazy private var documentDirectory: URL = {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-  }()
-  
-  lazy private var dataFilePath: URL = {
-    documentDirectory.appendingPathExtension("Numbers.plist")
-  }()
-  
   var numbersPool = NumbersPool() 
   var number: Number?
   
@@ -63,11 +54,10 @@ class AllNumbersViewController: UIViewController {
   }
   
   func saveNumbers() {
-    print(dataFilePath)
     let encoder = PropertyListEncoder()
     do {
       let data = try encoder.encode(numbersPool.numbers)
-      try data.write(to: dataFilePath, options: Data.WritingOptions.atomic)
+      try data.write(to: MyIO.dataFilePath(), options: Data.WritingOptions.atomic)
     }
     catch {
       print("Error encoding numbers array: \(error.localizedDescription)")
@@ -75,7 +65,7 @@ class AllNumbersViewController: UIViewController {
   }
   
   func loadNumbers() {
-    if let data = try? Data(contentsOf: dataFilePath) {
+    if let data = try? Data(contentsOf: MyIO.dataFilePath()) {
       let decoder = PropertyListDecoder()
       do {
         numbersPool.numbers = try decoder.decode([Number].self, from: data)
@@ -147,9 +137,23 @@ extension AllNumbersViewController: UITableViewDataSource {
 
 // MARK: - Number Change View Delegate Methods
 extension AllNumbersViewController: NumberChangeViewDelegate {
-  func update(number: Number) {
+  func update(number: Number, image: UIImage?) {    
     numbersPool.addNumber(number)
     tableView.reloadData()
     saveNumbers()
+    if let picture = image {
+      savePicture(picture, to: number.pictureURL)
+    }
+  }
+  
+  func savePicture(_ picture: UIImage, to pictureURL: URL ) {
+    if let data = picture.jpegData(compressionQuality: 0.5) {
+      do {
+        try data.write(to: pictureURL, options: .atomic)
+      }
+      catch {
+        print("Error writing file: \(error)")
+      }
+    }
   }
 }

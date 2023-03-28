@@ -14,6 +14,8 @@ class DetailsViewController: UIViewController {
       updateView()
     }
   }
+  
+  var image: UIImage?
 
   lazy private var numberLabel: UILabel! = {
     MyUI.configLabel(text: String(number.value))
@@ -81,7 +83,7 @@ class DetailsViewController: UIViewController {
 }
 
 extension DetailsViewController: NumberChangeViewDelegate {
-  func update(number: Number) {
+  func update(number: Number, image: UIImage?) {
     self.number = number    
   }
 }

@@ -8,13 +8,15 @@
 import UIKit
 
 protocol NumberChangeViewDelegate {
-  func update(number: Number)
+  func update(number: Number, image: UIImage?)
 }
 
 class NumberChangeViewController: UIViewController {
   
   var number: Number?
   var delegate: NumberChangeViewDelegate?
+  
+  var image: UIImage?
   
   lazy private var numberTextField: UITextField = {
     let numberTextField = MyUI.configTextField(placeholder: "Enter a new number")
@@ -126,7 +128,13 @@ class NumberChangeViewController: UIViewController {
     else {
       number = Number(value: numberValue, letters: lettersText, word: wordText)
     }
-    delegate?.update(number: number!)
+    if let image = image {
+      if !number!.hasPicture {
+        number!.pictureID = Number.nextPictureID()
+      }
+    }
+    
+    delegate?.update(number: number!, image: image)
     view.endEditing(true)
     dismiss(animated: true)
    }
@@ -212,7 +220,8 @@ extension NumberChangeViewController: UIImagePickerControllerDelegate, UINavigat
   
   // MARK: - Image Picker Delegate Methods
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    imageView.image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+    image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+    imageView.image = image
     dismiss(animated: true)
   }
   
