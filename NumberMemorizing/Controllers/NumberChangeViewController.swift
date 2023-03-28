@@ -34,8 +34,12 @@ class NumberChangeViewController: UIViewController {
     return wordTextField
   }()
   
+  lazy private var chooseImageButton: UIButton = {
+    MyUI.configButton(target: self, action: #selector(pickPhoto), for: .touchUpInside)
+  }()
+  
   lazy private var stackView: UIStackView = {
-    MyUI.configStackView(arrangedSubviews: [numberTextField, lettersTextField, wordTextField, imageView])
+    MyUI.configStackView(arrangedSubviews: [numberTextField, lettersTextField, wordTextField, imageView, chooseImageButton])
   }()
   
   lazy private var imageView: UIImageView = {
@@ -157,5 +161,62 @@ extension NumberChangeViewController: UITextFieldDelegate {
     }
     myNavigationItem.rightBarButtonItem?.isEnabled = allTextFieldFilled() && !newText.isEmpty
     return true
+  }
+}
+
+extension NumberChangeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  // MARK: - Image Helper Methods
+  private func takePhotoWithCamera() {
+    let imagePicker = UIImagePickerController()
+    imagePicker.sourceType = .camera
+    imagePicker.delegate = self
+    imagePicker.allowsEditing = true
+    present(imagePicker, animated: true)
+  }
+  
+  private func choosePhotoFromLibrary() {
+    let imagePicker = UIImagePickerController()
+    imagePicker.sourceType = .photoLibrary
+    imagePicker.delegate = self
+    imagePicker.allowsEditing = true
+    present(imagePicker, animated: true)
+  }
+  
+  @objc private func pickPhoto() {
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+      showPhotoMenu()
+    }
+    else {
+      choosePhotoFromLibrary()
+    }
+  }
+  
+  private func showPhotoMenu() {
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+    let actCancel = UIAlertAction(title: "Cancel", style: .cancel)
+    alert.addAction(actCancel)
+    
+    let actPhoto = UIAlertAction(title: "Take photo", style: .default) { _ in
+      self.takePhotoWithCamera()
+    }
+    alert.addAction(actPhoto)
+    
+    let actLibrary = UIAlertAction(title: "Choose from library", style: .default) { _ in
+      self.choosePhotoFromLibrary()
+    }
+    alert.addAction(actLibrary)
+    
+    present(alert, animated: true)
+  }
+  
+  // MARK: - Image Picker Delegate Methods
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    imageView.image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+    dismiss(animated: true)
+  }
+  
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    dismiss(animated: true)
   }
 }

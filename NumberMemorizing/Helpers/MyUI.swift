@@ -52,4 +52,13 @@ class MyUI {
     tapGestureRecognizer.numberOfTouchesRequired = 1
     return tapGestureRecognizer
   }
+  
+  class func configButton(target: Any?, action: Selector, for controlEvents: UIControl.Event) -> UIButton {
+    let chooseImageButton = UIButton(type: .system)
+    chooseImageButton.frame = CGRect.zero
+    chooseImageButton.setTitle("Choose the image", for: .normal)
+    chooseImageButton.sizeToFit()
+    chooseImageButton.addTarget(target, action: action, for: controlEvents)
+    return chooseImageButton
+  }
 }
