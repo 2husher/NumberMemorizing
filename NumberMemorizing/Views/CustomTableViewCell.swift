@@ -18,7 +18,7 @@ class CustomTableViewCell: UITableViewCell {
   }()
  
   lazy var customImageView: UIImageView = {
-    let imageView = MyUI.configImageView(imageName: "default")
+    let imageView = MyUI.configImageView(image: UIImage(named: "default"))
     return imageView
   }()
   

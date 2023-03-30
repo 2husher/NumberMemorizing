@@ -82,6 +82,7 @@ extension AllNumbersViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let detailsVC = DetailsViewController()
     detailsVC.number = numbersPool.number(at: indexPath.row)
+    detailsVC.image = (tableView.cellForRow(at: indexPath) as? CustomTableViewCell)?.customImageView.image
     navigationController?.pushViewController(detailsVC, animated: true)
   }
 }

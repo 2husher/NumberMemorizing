@@ -30,7 +30,7 @@ class DetailsViewController: UIViewController {
   }()
 
   lazy private var imageView: UIImageView! = {
-    MyUI.configImageView(imageName: "default")
+    MyUI.configImageView(image: image)
   }()
 
   lazy private var stackView: UIStackView! = {

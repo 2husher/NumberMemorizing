@@ -38,8 +38,7 @@ class MyUI {
     return stackView
   }
   
-  class func configImageView(imageName name: String) -> UIImageView {
-    let image = UIImage(named: name)
+  class func configImageView(image: UIImage?) -> UIImageView {
     let imageView = UIImageView(image: image)
 //    imageView.backgroundColor = .red
     imageView.contentMode = .scaleAspectFill
