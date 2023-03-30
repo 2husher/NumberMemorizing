@@ -8,7 +8,7 @@
 import UIKit
 
 protocol NumberChangeViewDelegate {
-  func update(number: Number, image: UIImage?)
+  func numberChangeViewControllerChanged(number: Number, image: UIImage?)
 }
 
 class NumberChangeViewController: UIViewController {
@@ -56,7 +56,7 @@ class NumberChangeViewController: UIViewController {
   
   lazy private var myNavigationItem: UINavigationItem = {
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(changeNumber))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
     if number == nil {
       navigationItem.title = "Create Number"
       navigationItem.rightBarButtonItem?.isEnabled = false
@@ -110,7 +110,7 @@ class NumberChangeViewController: UIViewController {
     ])
   }
  
-  @objc private func changeNumber() {
+  @objc private func done() {
     let numberText = numberTextField.text!
     let lettersText = lettersTextField.text!
     let wordText = wordTextField.text!
@@ -119,22 +119,21 @@ class NumberChangeViewController: UIViewController {
     guard let numberValue = Int(numberText) else { return }
     guard !lettersText.isEmpty else { return }
     guard !wordText.isEmpty else { return }
-    
-    if number != nil {
-      number!.value = numberValue
-      number!.letters = lettersText
-      number!.word = wordText
+
+    if let number = number {
+      number.value = numberValue
+      number.letters = lettersText
+      number.word = wordText
+      self.number = number
     }
     else {
       number = Number(value: numberValue, letters: lettersText, word: wordText)
     }
-    if let image = image {
-      if !number!.hasPicture {
-        number!.pictureID = Number.nextPictureID()
-      }
+    if image != nil, let number = number, !number.hasPicture {
+      number.pictureID = Number.nextPictureID()
+      self.number = number
     }
-    
-    delegate?.update(number: number!, image: image)
+    delegate?.numberChangeViewControllerChanged(number: number!, image: image)
     view.endEditing(true)
     dismiss(animated: true)
    }

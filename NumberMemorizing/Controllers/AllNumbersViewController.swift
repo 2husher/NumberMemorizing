@@ -117,7 +117,7 @@ extension AllNumbersViewController: UITableViewDataSource {
 
 // MARK: - Number Change View Delegate Methods
 extension AllNumbersViewController: NumberChangeViewDelegate {
-  func update(number: Number, image: UIImage?) {    
+  func numberChangeViewControllerChanged(number: Number, image: UIImage?) {
     numbersPool.addNumber(number)
     tableView.reloadData()
     MyIO.saveNumbers(numbersPool.numbers)

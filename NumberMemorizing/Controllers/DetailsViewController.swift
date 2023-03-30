@@ -86,7 +86,7 @@ class DetailsViewController: UIViewController {
 }
 
 extension DetailsViewController: NumberChangeViewDelegate {
-  func update(number: Number, image: UIImage?) {
-    self.number = number    
+  func numberChangeViewControllerChanged(number: Number, image: UIImage?) {
+    self.number = number
   }
 }
