@@ -45,7 +45,7 @@ class NumberChangeViewController: UIViewController {
   }()
   
   lazy private var imageView: UIImageView = {
-    MyUI.configImageView(image: UIImage(named: "default"))
+    MyUI.configImageView(image: image ?? UIImage(named: "default"))
   }()
   
   lazy private var tapGestureRecognizer: UITapGestureRecognizer = {

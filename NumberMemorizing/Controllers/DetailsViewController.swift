@@ -54,6 +54,9 @@ class DetailsViewController: UIViewController {
     let changeVC = NumberChangeViewController()
     let changeNavC = UINavigationController(rootViewController: changeVC)
     changeVC.number = number
+    if image != nil {
+      changeVC.image = image
+    }
     changeVC.delegate = self
     present(changeNavC, animated: true)
     changeVC.modalPresentationStyle = .fullScreen
