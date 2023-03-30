@@ -10,4 +10,5 @@ import Foundation
 class MyConstants {
   
   static let tableViewCellId = "Cell"
+  static let tableViewRowHeight: CGFloat = 60
 }

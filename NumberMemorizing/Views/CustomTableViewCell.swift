@@ -18,7 +18,8 @@ class CustomTableViewCell: UITableViewCell {
   }()
  
   lazy var customImageView: UIImageView = {
-    MyUI.configImageView(imageName: "default")
+    let imageView = MyUI.configImageView(imageName: "default")
+    return imageView
   }()
   
   lazy private var stackView: UIStackView = {
@@ -64,10 +65,11 @@ class CustomTableViewCell: UITableViewCell {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     numberLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
     NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+      stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
       stackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: 20),
       stackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: -20),
-      customImageView.widthAnchor.constraint(equalTo: customImageView.heightAnchor)
+      customImageView.widthAnchor.constraint(equalTo: customImageView.heightAnchor),
+      customImageView.widthAnchor.constraint(equalToConstant: MyConstants.tableViewRowHeight - 5 * 2)
     ])
   }
 }

@@ -29,7 +29,7 @@ class AllNumbersViewController: UIViewController {
     navigationItem.leftBarButtonItem = editButtonItem
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewNumber))
     
-    tableView.rowHeight = 55
+    tableView.rowHeight = MyConstants.tableViewRowHeight
     
     loadNumbers()
   }
@@ -97,7 +97,9 @@ extension AllNumbersViewController: UITableViewDataSource {
     let number = numbersPool.number(at: indexPath.row)
     cell.numberLabel.text = String(number.value)
     cell.wordLabel.text = String(number.word)
-    cell.customImageView.image = UIImage(named: "square")
+    if number.hasPicture {
+      cell.customImageView.image = UIImage(contentsOfFile: number.pictureURL.path())
+    }
     return cell
   }
   
