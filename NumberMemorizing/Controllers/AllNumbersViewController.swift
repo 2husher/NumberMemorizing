@@ -31,7 +31,7 @@ class AllNumbersViewController: UIViewController {
     
     tableView.rowHeight = MyConstants.tableViewRowHeight
     
-    loadNumbers()
+    numbersPool.numbers = MyIO.loadNumbers()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -51,29 +51,6 @@ class AllNumbersViewController: UIViewController {
     changeVC.number = number
     changeVC.delegate = self
     present(changeNavC, animated: true)
-  }
-  
-  func saveNumbers() {
-    let encoder = PropertyListEncoder()
-    do {
-      let data = try encoder.encode(numbersPool.numbers)
-      try data.write(to: MyIO.dataFilePath(), options: Data.WritingOptions.atomic)
-    }
-    catch {
-      print("Error encoding numbers array: \(error.localizedDescription)")
-    }
-  }
-  
-  func loadNumbers() {
-    if let data = try? Data(contentsOf: MyIO.dataFilePath()) {
-      let decoder = PropertyListDecoder()
-      do {
-        numbersPool.numbers = try decoder.decode([Number].self, from: data)
-      }
-      catch {
-        print("Error decoding numbers array: \(error.localizedDescription)")
-      }
-    }
   }
 }
 
@@ -119,7 +96,7 @@ extension AllNumbersViewController: UITableViewDataSource {
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
           self.numbersPool.removeNumber(number)
           self.tableView.deleteRows(at: [indexPath], with: .automatic)
-          self.saveNumbers()
+          MyIO.saveNumbers(self.numbersPool.numbers)
         })
         ac.addAction(deleteAction)
         return ac
@@ -130,7 +107,7 @@ extension AllNumbersViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     numbersPool.moveNumber(from: sourceIndexPath.row, to: destinationIndexPath.row)
-    saveNumbers()
+    MyIO.saveNumbers(numbersPool.numbers)
   }
   
   func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
@@ -143,7 +120,7 @@ extension AllNumbersViewController: NumberChangeViewDelegate {
   func update(number: Number, image: UIImage?) {    
     numbersPool.addNumber(number)
     tableView.reloadData()
-    saveNumbers()
+    MyIO.saveNumbers(numbersPool.numbers)
     if let picture = image {
       savePicture(picture, to: number.pictureURL)
     }

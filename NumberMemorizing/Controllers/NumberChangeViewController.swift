@@ -55,15 +55,15 @@ class NumberChangeViewController: UIViewController {
   var textFields = [UITextField]()
   
   lazy private var myNavigationItem: UINavigationItem = {
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(changeNumber))
     if number == nil {
       navigationItem.title = "Create Number"
+      navigationItem.rightBarButtonItem?.isEnabled = false
     }
     else {
       navigationItem.title = "Edit Number"
     }
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(changeNumber))
-    navigationItem.rightBarButtonItem?.isEnabled = false
     return navigationItem
   }()
   
