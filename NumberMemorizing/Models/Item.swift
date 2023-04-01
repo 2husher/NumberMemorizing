@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Item {
+class Item: NSObject {
   var number: Number
   var picture: UIImage?
   
