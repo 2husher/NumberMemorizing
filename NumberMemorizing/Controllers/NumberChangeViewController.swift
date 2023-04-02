@@ -7,17 +7,15 @@
 
 import UIKit
 
-protocol NumberChangeViewDelegate {
-  func numberChangeViewControllerChanged(number: Number, image: UIImage?)
+protocol NumberChangeViewControllerDelegate {
+  func numberChangeViewControllerChanged(item: Item, image: UIImage?)
 }
 
 class NumberChangeViewController: UIViewController {
   
-  var number: Number?
-  var delegate: NumberChangeViewDelegate?
-  
-  var image: UIImage?
-  
+  var item: Item?
+  var delegate: NumberChangeViewControllerDelegate?
+
   lazy private var numberTextField: UITextField = {
     let numberTextField = MyUI.configTextField(placeholder: "Enter a new number")
     numberTextField.delegate = self
@@ -45,7 +43,7 @@ class NumberChangeViewController: UIViewController {
   }()
   
   lazy private var imageView: UIImageView = {
-    MyUI.configImageView(image: image ?? UIImage(named: "default"))
+    MyUI.configImageView(image: item?.picture ?? UIImage(named: "default"))
   }()
   
   lazy private var tapGestureRecognizer: UITapGestureRecognizer = {
@@ -57,7 +55,7 @@ class NumberChangeViewController: UIViewController {
   lazy private var myNavigationItem: UINavigationItem = {
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
-    if number == nil {
+    if item == nil {
       navigationItem.title = "Create Number"
       navigationItem.rightBarButtonItem?.isEnabled = false
     }
@@ -81,10 +79,10 @@ class NumberChangeViewController: UIViewController {
   }
   
   private func configView() {
-    if let number = number {
-      numberTextField.text = String(number.value)
-      lettersTextField.text = number.letters
-      wordTextField.text = number.word
+    if let item = item {
+      numberTextField.text = String(item.numberValue)
+      lettersTextField.text = item.letters
+      wordTextField.text = item.word
     }
     
     textFields.append(numberTextField)
@@ -114,26 +112,26 @@ class NumberChangeViewController: UIViewController {
     let numberText = numberTextField.text!
     let lettersText = lettersTextField.text!
     let wordText = wordTextField.text!
-    
+
     guard !numberText.isEmpty else { return }
     guard let numberValue = Int(numberText) else { return }
     guard !lettersText.isEmpty else { return }
     guard !wordText.isEmpty else { return }
 
-    if let number = number {
-      number.value = numberValue
-      number.letters = lettersText
-      number.word = wordText
-      self.number = number
+    if let item = item {
+      // FIXME: do I need to check each field whether it changed?
+      item.numberValue = numberValue
+      item.letters = lettersText
+      item.word = wordText
     }
     else {
-      number = Number(value: numberValue, letters: lettersText, word: wordText)
+      item = Item(number: numberValue, letters: lettersText, word: wordText)
     }
-    if image != nil, let number = number, !number.hasPicture {
-      number.pictureID = Number.nextPictureID()
-      self.number = number
-    }
-    delegate?.numberChangeViewControllerChanged(number: number!, image: image)
+//    if image != nil, let number = number, !number.hasPicture {
+//      number.pictureID = Item.nextPictureID()
+//      self.number = number
+//    }
+    delegate?.numberChangeViewControllerChanged(item: item!, image: nil)
     view.endEditing(true)
     dismiss(animated: true)
    }
@@ -219,8 +217,8 @@ extension NumberChangeViewController: UIImagePickerControllerDelegate, UINavigat
   
   // MARK: - Image Picker Delegate Methods
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-    imageView.image = image
+//    item?.picture = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+//    imageView.image = item?.picture
     dismiss(animated: true)
   }
   

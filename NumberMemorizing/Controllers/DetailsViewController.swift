@@ -7,26 +7,28 @@
 
 import UIKit
 
+protocol DetailsViewControllerDelegate {
+  func detailsViewControllerChanged(item: Item, image: UIImage?)
+}
+
 class DetailsViewController: UIViewController {
   
-  var number: Number! {
-    didSet {
-      updateView()
-    }
-  }
+  var item: Item!
+  
+  var delegate: DetailsViewControllerDelegate?
   
   var image: UIImage?
 
   lazy private var numberLabel: UILabel! = {
-    MyUI.configLabel(text: String(number.value))
+    MyUI.configLabel(text: String(item.numberValue))
   }()
 
   lazy private var lettersLabel: UILabel! = {
-    MyUI.configLabel(text: number.letters)
+    MyUI.configLabel(text: item.letters)
   }()
  
   lazy private var wordLabel: UILabel! = {
-    MyUI.configLabel(text: number.word)
+    MyUI.configLabel(text: item.word)
   }()
 
   lazy private var imageView: UIImageView! = {
@@ -53,9 +55,9 @@ class DetailsViewController: UIViewController {
   @objc private func editNumber() {
     let changeVC = NumberChangeViewController()
     let changeNavC = UINavigationController(rootViewController: changeVC)
-    changeVC.number = number
+    changeVC.item = item
     if image != nil {
-      changeVC.image = image
+      changeVC.item?.picture = image
     }
     changeVC.delegate = self
     present(changeNavC, animated: true)
@@ -79,14 +81,15 @@ class DetailsViewController: UIViewController {
     guard lettersLabel != nil else { return }
     guard wordLabel != nil else { return }
     
-    numberLabel.text = String(number.value)
-    lettersLabel.text = number.letters
-    wordLabel.text = number.word
+    numberLabel.text = String(item.numberValue)
+    lettersLabel.text = item.letters
+    wordLabel.text = item.word
   }
 }
 
-extension DetailsViewController: NumberChangeViewDelegate {
-  func numberChangeViewControllerChanged(number: Number, image: UIImage?) {
-    self.number = number
+extension DetailsViewController: NumberChangeViewControllerDelegate {
+  func numberChangeViewControllerChanged(item: Item, image: UIImage?) {
+    updateView()
+    delegate?.detailsViewControllerChanged(item: item, image: image)
   }
 }
