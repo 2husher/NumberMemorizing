@@ -11,15 +11,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
 
+  lazy var allNumbersVC: AllNumbersViewController = {
+    let vc = AllNumbersViewController()
+    vc.title = "One"
+    return vc
+  }()
+  
+  lazy var settingsVC: SettingsViewController = {
+    let vc = SettingsViewController()
+    vc.title = "Two"
+    return vc
+  }()
+  
+  lazy var tabBarController: UITabBarController = {
+    let tbc = UITabBarController()
+    tbc.viewControllers = [
+      UINavigationController(rootViewController: allNumbersVC),
+      UINavigationController(rootViewController: settingsVC)
+    ]
+    return tbc
+  }()
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
     
-    let tabBarController = UITabBarController()
-    tabBarController.viewControllers = [
-      UINavigationController(rootViewController: AllNumbersViewController())
-    ]
     window.rootViewController = tabBarController
     window.makeKeyAndVisible()
     self.window = window
