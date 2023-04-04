@@ -32,7 +32,7 @@ class AllNumbersViewController: UIViewController {
     
     tableView.rowHeight = MyConstants.tableViewRowHeight
     
-    _ = itemStore.loadItems()
+    itemStore.loadWithItems()
   }
    
   // MARK: - Helper Methods

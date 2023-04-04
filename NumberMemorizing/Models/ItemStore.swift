@@ -52,7 +52,7 @@ class ItemStore {
     }
   }
   
-  func loadItems() -> [Item] {
+  func loadWithItems() {
     let numbers = loadNumbers()
     for number in numbers {
       let item = Item(number: number.numberValue, letters: number.letters, word: number.word, pictureID: number.pictureID)
@@ -61,7 +61,6 @@ class ItemStore {
       }
       items.append(item)
     }
-    return items
   }
   
   // MARK: - Private Structures and Variables
