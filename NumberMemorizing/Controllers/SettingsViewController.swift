@@ -10,7 +10,7 @@ import UIKit
 class SettingsViewController: UIViewController {
   
   lazy private var restoreInitialNumbersButton: UIButton = {
-    MyUI.configButton(target: self, action: #selector(restoreInitialNumbers), for: .touchUpInside)
+    MyUI.configButton(title: "Restore initial numbers", target: self, action: #selector(restoreInitialNumbers))
   }()
 
   override func viewDidLoad() {

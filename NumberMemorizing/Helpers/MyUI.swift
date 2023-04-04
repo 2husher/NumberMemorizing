@@ -53,10 +53,10 @@ class MyUI {
     return tapGestureRecognizer
   }
   
-  class func configButton(target: Any?, action: Selector, for controlEvents: UIControl.Event) -> UIButton {
+  class func configButton(title: String = "Button", target: Any?, action: Selector, for controlEvents: UIControl.Event = .touchUpInside) -> UIButton {
     let chooseImageButton = UIButton(type: .system)
     chooseImageButton.frame = CGRect.zero
-    chooseImageButton.setTitle("Choose the image", for: .normal)
+    chooseImageButton.setTitle(title, for: .normal)
     chooseImageButton.sizeToFit()
     chooseImageButton.addTarget(target, action: action, for: controlEvents)
     return chooseImageButton

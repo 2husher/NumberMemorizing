@@ -37,7 +37,7 @@ class NumberChangeViewController: UIViewController {
   }()
   
   lazy private var selectedPictureButton: UIButton = {
-    MyUI.configButton(target: self, action: #selector(pickPhoto), for: .touchUpInside)
+    MyUI.configButton(title: "Select a picture", target: self, action: #selector(pickPhoto))
   }()
   
   lazy private var stackView: UIStackView = {
