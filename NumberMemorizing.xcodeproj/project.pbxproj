@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FABB606829DC0CB000DC9A41 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB606729DC0CB000DC9A41 /* SettingsViewController.swift */; };
-		FABB606C29DC21EE00DC9A41 /* Initial Numbers.plist in Resources */ = {isa = PBXBuildFile; fileRef = FABB606B29DC21EE00DC9A41 /* Initial Numbers.plist */; };
+		FABB606C29DC21EE00DC9A41 /* InitialNumbers.plist in Resources */ = {isa = PBXBuildFile; fileRef = FABB606B29DC21EE00DC9A41 /* InitialNumbers.plist */; };
 		FABECCA529D319320033B356 /* MyIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABECCA429D319320033B356 /* MyIO.swift */; };
 		FAC0727E29B8A98900D79ACF /* NumberChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0727D29B8A98900D79ACF /* NumberChangeViewController.swift */; };
 		FAC0728029B9009B00D79ACF /* ItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0727F29B9009B00D79ACF /* ItemStore.swift */; };
@@ -27,7 +27,7 @@
 
 /* Begin PBXFileReference section */
 		FABB606729DC0CB000DC9A41 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		FABB606B29DC21EE00DC9A41 /* Initial Numbers.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Initial Numbers.plist"; sourceTree = "<group>"; };
+		FABB606B29DC21EE00DC9A41 /* InitialNumbers.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = InitialNumbers.plist; sourceTree = "<group>"; };
 		FABECCA429D319320033B356 /* MyIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIO.swift; sourceTree = "<group>"; };
 		FAC0727D29B8A98900D79ACF /* NumberChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberChangeViewController.swift; sourceTree = "<group>"; };
 		FAC0727F29B9009B00D79ACF /* ItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStore.swift; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		FAC4B96D29B396EB00B90535 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FABB606B29DC21EE00DC9A41 /* Initial Numbers.plist */,
+				FABB606B29DC21EE00DC9A41 /* InitialNumbers.plist */,
 				FAC62B8C29AF9DC1005D9392 /* Assets.xcassets */,
 				FAC62B8E29AF9DC1005D9392 /* LaunchScreen.storyboard */,
 			);
@@ -197,7 +197,7 @@
 			files = (
 				FAC62B9029AF9DC1005D9392 /* LaunchScreen.storyboard in Resources */,
 				FAC62B8D29AF9DC1005D9392 /* Assets.xcassets in Resources */,
-				FABB606C29DC21EE00DC9A41 /* Initial Numbers.plist in Resources */,
+				FABB606C29DC21EE00DC9A41 /* InitialNumbers.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
