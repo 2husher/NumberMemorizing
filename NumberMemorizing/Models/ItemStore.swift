@@ -8,7 +8,7 @@
 import UIKit
 
 class ItemStore {
-  struct Number: Codable {
+  private struct Number: Codable {
     var numberValue: Int
     var letters: String
     var word: String
