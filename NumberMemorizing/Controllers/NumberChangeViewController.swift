@@ -8,13 +8,15 @@
 import UIKit
 
 protocol NumberChangeViewControllerDelegate {
-  func numberChangeViewControllerChanged(item: Item, image: UIImage?)
+  func numberChangeViewControllerChanged(item: Item)
 }
 
 class NumberChangeViewController: UIViewController {
   
   var item: Item?
   var delegate: NumberChangeViewControllerDelegate?
+  
+  var selectedPicture: UIImage?
 
   lazy private var numberTextField: UITextField = {
     let numberTextField = MyUI.configTextField(placeholder: "Enter a new number")
@@ -34,12 +36,12 @@ class NumberChangeViewController: UIViewController {
     return wordTextField
   }()
   
-  lazy private var chooseImageButton: UIButton = {
+  lazy private var selectedPictureButton: UIButton = {
     MyUI.configButton(target: self, action: #selector(pickPhoto), for: .touchUpInside)
   }()
   
   lazy private var stackView: UIStackView = {
-    MyUI.configStackView(arrangedSubviews: [numberTextField, lettersTextField, wordTextField, imageView, chooseImageButton])
+    MyUI.configStackView(arrangedSubviews: [numberTextField, lettersTextField, wordTextField, imageView, selectedPictureButton])
   }()
   
   lazy private var imageView: UIImageView = {
@@ -123,15 +125,17 @@ class NumberChangeViewController: UIViewController {
       item.numberValue = numberValue
       item.letters = lettersText
       item.word = wordText
+      // TODO: Does item from box affect inside option?
     }
     else {
       item = Item(number: numberValue, letters: lettersText, word: wordText)
     }
-//    if image != nil, let number = number, !number.hasPicture {
-//      number.pictureID = Item.nextPictureID()
-//      self.number = number
-//    }
-    delegate?.numberChangeViewControllerChanged(item: item!, image: nil)
+    // TODO: implement hasPicture
+    if selectedPicture != nil, let item = item {
+      item.pictureID = Item.nextPictureID()
+      item.picture = selectedPicture
+    }
+    delegate?.numberChangeViewControllerChanged(item: item!)
     view.endEditing(true)
     dismiss(animated: true)
    }
@@ -217,8 +221,8 @@ extension NumberChangeViewController: UIImagePickerControllerDelegate, UINavigat
   
   // MARK: - Image Picker Delegate Methods
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//    item?.picture = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-//    imageView.image = item?.picture
+    selectedPicture = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+    imageView.image = selectedPicture
     dismiss(animated: true)
   }
   

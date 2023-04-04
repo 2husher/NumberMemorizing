@@ -22,6 +22,8 @@ class AllNumbersViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    print(MyIO.documentDirectory())
+    
     view.addSubview(tableView)
     
     navigationItem.title = "Numbers"
@@ -69,14 +71,10 @@ extension AllNumbersViewController: UITableViewDataSource {
     let item = itemStore.items[indexPath.row]
     cell.numberLabel.text = String(item.numberValue)
     cell.wordLabel.text = String(item.word)
-    if item.hasPicture {
-      cell.customImageView.image = UIImage(contentsOfFile: item.pictureURL.path())
-    }
+    cell.customImageView.image = item.picture ?? UIImage(named: "default")
     return cell
   }
   
-  // in Item - number + image
-  // save in one method in diff places
   // validate returns enum - error and valid
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -94,7 +92,7 @@ extension AllNumbersViewController: UITableViewDataSource {
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
           self.itemStore.removeItem(item)
           self.tableView.deleteRows(at: [indexPath], with: .automatic)
-          self.itemStore.saveItems()
+          self.itemStore.saveItem(item)
         })
         ac.addAction(deleteAction)
         return ac
@@ -104,8 +102,9 @@ extension AllNumbersViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
-    itemStore.saveItems()
+    if let item = itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row) {
+      itemStore.saveItem(item)
+    }
   }
   
   func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
@@ -115,37 +114,17 @@ extension AllNumbersViewController: UITableViewDataSource {
 
 // MARK: - Number Change View Delegate Methods
 extension AllNumbersViewController: NumberChangeViewControllerDelegate {
-  func numberChangeViewControllerChanged(item: Item, image: UIImage?) {
+  func numberChangeViewControllerChanged(item: Item) {
     itemStore.addItem(item)
-    itemStore.saveItems()
+    itemStore.saveItem(item)
     tableView.reloadData()
   }
-  
-//  func numberChangeViewControllerChanged(number: Item, image: UIImage?) {
-//    numbersPool.addNumber(number)
-//    tableView.reloadData()
-//    MyIO.saveNumbers(numbersPool.numbers)
-//    if let picture = image {
-//      savePicture(picture, to: number.pictureURL)
-//    }
-//  }
-//
-//  func savePicture(_ picture: UIImage, to pictureURL: URL ) {
-//    if let data = picture.jpegData(compressionQuality: 0.5) {
-//      do {
-//        try data.write(to: pictureURL, options: .atomic)
-//      }
-//      catch {
-//        print("Error writing file: \(error)")
-//      }
-//    }
-//  }
 }
 
 // MARK: - Details View Controller Delegate Methods
 extension AllNumbersViewController: DetailsViewControllerDelegate {
-  func detailsViewControllerChanged(item: Item, image: UIImage?) {
-    itemStore.saveItems()
+  func detailsViewControllerChanged(item: Item) {
+    itemStore.saveItem(item)
     tableView.reloadData()
   }
 }

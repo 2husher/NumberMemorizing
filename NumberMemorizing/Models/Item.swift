@@ -13,11 +13,7 @@ class Item: NSObject {
   var word: String
   var pictureID: Int?
   var picture: UIImage?
-  
-  var hasPicture: Bool {
-    pictureID != nil
-  }
-  
+
   var pictureURL: URL {
     assert(pictureID != nil, "No photo ID set")
     let filename = "Photo-\(pictureID!).jpg"
