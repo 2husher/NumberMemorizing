@@ -54,7 +54,7 @@ class AllNumbersViewController: UIViewController {
 extension AllNumbersViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let detailsVC = DetailsViewController()
-    detailsVC.item = itemStore.items[indexPath.row]
+    detailsVC.item = itemStore.item(at: indexPath.row)
     detailsVC.delegate = self
     navigationController?.pushViewController(detailsVC, animated: true)
   }
@@ -63,12 +63,12 @@ extension AllNumbersViewController: UITableViewDelegate {
 // MARK: Table View Data Source Methods
 extension AllNumbersViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return itemStore.items.count
+    return itemStore.size
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: MyConstants.tableViewCellId, for: indexPath) as! CustomTableViewCell
-    let item = itemStore.items[indexPath.row]
+    let item = itemStore.item(at: indexPath.row)
     cell.numberLabel.text = String(item.numberValue)
     cell.wordLabel.text = String(item.word)
     cell.customImageView.image = item.picture ?? UIImage(named: "default")
@@ -79,7 +79,7 @@ extension AllNumbersViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      let item = itemStore.items[indexPath.row]
+      let item = itemStore.item(at: indexPath.row)
       
       let alertController = {
         let title = "Delete \(item.numberValue)"

@@ -15,7 +15,15 @@ class ItemStore {
     var pictureID: Int?
   }
   
-  var items: [Item] = []
+  private var items: [Item] = []
+  
+  var size: Int {
+    return items.count
+  }
+  
+  func item(at index: Int) -> Item {
+    return items[index]
+  }
   
   func remove(item: Item) {
     let index = items.firstIndex(of: item)
