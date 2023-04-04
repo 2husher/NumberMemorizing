@@ -13,13 +13,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   lazy var allNumbersVC: AllNumbersViewController = {
     let vc = AllNumbersViewController()
-    vc.title = "One"
+    vc.title = "All Numbers"
     return vc
   }()
   
   lazy var settingsVC: SettingsViewController = {
     let vc = SettingsViewController()
-    vc.title = "Two"
+    vc.title = "Settings"
     return vc
   }()
   
