@@ -8,15 +8,7 @@
 import UIKit
 
 class ItemStore {
-  private struct Number: Codable {
-    var numberValue: Int
-    var letters: String
-    var word: String
-    var pictureID: Int?
-  }
-  
-  private var items: [Item] = []
-  
+  // MARK: - Public Variables and Methods
   var size: Int {
     return items.count
   }
@@ -72,7 +64,17 @@ class ItemStore {
     return items
   }
   
-  // MARK: - Helper Methods
+  // MARK: - Private Structures and Variables
+  private struct Number: Codable {
+    var numberValue: Int
+    var letters: String
+    var word: String
+    var pictureID: Int?
+  }
+  
+  private var items: [Item] = []
+  
+  // MARK: - Private Helper Methods
   private func save(numbers: [Number]) {
     let encoder = PropertyListEncoder()
     do {
