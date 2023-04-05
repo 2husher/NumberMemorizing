@@ -35,6 +35,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
+
+    initPlistAtFirstUse()
     
     window.rootViewController = tabBarController
     window.makeKeyAndVisible()
@@ -72,6 +74,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
   }
 
-
+  // MARK: - Helper Methods
+  func initPlistAtFirstUse() {
+    let userDefaults = UserDefaults.standard
+    let firstUse = !userDefaults.bool(forKey: MyConstants.notFirstUse)
+    if firstUse {
+      userDefaults.set(firstUse, forKey: MyConstants.notFirstUse)
+      MyIO.resetNumbersPlist()
+    }
+  }
 }
-

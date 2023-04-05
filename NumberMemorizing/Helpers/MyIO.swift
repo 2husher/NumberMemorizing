@@ -16,4 +16,15 @@ class MyIO {
   class func dataFilePath() -> URL{
     documentDirectory().appending(component: "Numbers.plist")
   }
+  
+  class func resetNumbersPlist() {
+    do {
+      let fromUrl = Bundle.main.url(forResource: "InitialNumbers", withExtension: "plist")!
+      let data = try Data(contentsOf: fromUrl)
+      try data.write(to: dataFilePath(), options: .atomic)
+    }
+    catch {
+      print((error as NSError).description)
+    }
+  }
 }
