@@ -26,9 +26,9 @@ class NumberChangeViewController: UIViewController {
   }()
 
   // TODO: scroll view for letters choices.
-//  lazy private var lettersLabel: UILabel! = {
-//    MyUI.configLabel(text: item.letters)
-//  }()
+  lazy private var lettersLabel: UILabel! = {
+    MyUI.configLabel(text: "LETTERS FOR NUMBER")
+  }()
 
   lazy private var lettersTextField: UITextField = {
     let lettersTextField = MyUI.configTextField(placeholder: "Enter the letters")
@@ -47,7 +47,7 @@ class NumberChangeViewController: UIViewController {
   }()
   
   lazy private var stackView: UIStackView = {
-    MyUI.configStackView(arrangedSubviews: [numberTextField, lettersTextField, wordTextField, imageView, selectedPictureButton])
+    MyUI.configStackView(arrangedSubviews: [numberTextField, lettersLabel, lettersTextField, wordTextField, imageView, selectedPictureButton])
   }()
   
   lazy private var imageView: UIImageView = {
@@ -170,6 +170,10 @@ extension NumberChangeViewController: UITextFieldDelegate {
     if isQuantityOfDigitsInNumberMoreThanLimit(textField: textField, text: newText) { return false }
 
     if !onlyDigitsEnteredForNumber(textField: textField, text: newText) { return false }
+
+    if textField.tag == MyConstants.numberTextFieldTag {
+      lettersLabel.text = newText
+    }
 
 
     myNavigationItem.rightBarButtonItem?.isEnabled = allTextFieldsFilled(currentTextField: textField) && !newText.isEmpty
