@@ -21,6 +21,7 @@ class NumberChangeViewController: UIViewController {
   lazy private var numberTextField: UITextField = {
     let numberTextField = MyUI.configTextField(placeholder: "Enter a new number")
     numberTextField.delegate = self
+    numberTextField.tag = MyConstants.numberTextFieldTag
     return numberTextField
   }()
   
@@ -160,15 +161,29 @@ extension NumberChangeViewController: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     let oldText = textField.text!
     let newText = oldText.replacingCharacters(in: Range(range, in: oldText)!, with: string)
-    let allTextFieldFilled = { () -> Bool in
-      for field in self.textFields {
-        if textField != field && field.text!.isEmpty {
-          return false
-        }
-      }
+
+    if isQuantityOfDigitsInNumberMoreThanLimit(textField: textField, text: newText) { return false }
+
+    myNavigationItem.rightBarButtonItem?.isEnabled = allTextFieldsFilled(currentTextField: textField) && !newText.isEmpty
+    return true
+  }
+
+  // MARK: - Helper Methods
+  private func isQuantityOfDigitsInNumberMoreThanLimit(textField: UITextField, text: String) -> Bool {
+    let maxQuantityDigitsInNumber = 8
+    if textField.tag == MyConstants.numberTextFieldTag, text.count > maxQuantityDigitsInNumber {
+      print("In number text field")
       return true
     }
-    myNavigationItem.rightBarButtonItem?.isEnabled = allTextFieldFilled() && !newText.isEmpty
+    return false
+  }
+
+  private func allTextFieldsFilled(currentTextField: UITextField) -> Bool {
+    for field in self.textFields {
+      if currentTextField != field && field.text!.isEmpty {
+        return false
+      }
+    }
     return true
   }
 }
