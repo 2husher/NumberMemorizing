@@ -12,4 +12,5 @@ class MyConstants {
   static let tableViewCellId = "Cell"
   static let tableViewRowHeight: CGFloat = 60
   static let notFirstUse = "NotFirstUse"
+  static let resetNumbersPlist = "ResetNumberPlist"
 }

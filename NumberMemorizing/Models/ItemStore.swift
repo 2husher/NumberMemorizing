@@ -53,6 +53,7 @@ class ItemStore {
   }
   
   func loadWithItems() {
+    items.removeAll()
     let numbers = loadNumbers()
     for number in numbers {
       let item = Item(number: number.numberValue, letters: number.letters, word: number.word, pictureID: number.pictureID)

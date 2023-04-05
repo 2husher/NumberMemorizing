@@ -34,6 +34,11 @@ class AllNumbersViewController: UIViewController {
     
     itemStore.loadWithItems()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    ifResetNumberPlistThenReloadData()
+  }
    
   // MARK: - Helper Methods
   override func setEditing(_ editing: Bool, animated: Bool) {
@@ -47,6 +52,18 @@ class AllNumbersViewController: UIViewController {
     changeVC.item = nil
     changeVC.delegate = self
     present(changeNavC, animated: true)
+  }
+  
+  private func ifResetNumberPlistThenReloadData() {
+    let userDefaults = UserDefaults.standard
+    var resetNumbersPlist = userDefaults.bool(forKey: MyConstants.resetNumbersPlist)
+    if resetNumbersPlist {
+      resetNumbersPlist.toggle()
+      userDefaults.set(resetNumbersPlist, forKey: MyConstants.resetNumbersPlist)
+      MyIO.resetNumbersPlist()
+      itemStore.loadWithItems()
+      tableView.reloadData()
+    }
   }
 }
 
