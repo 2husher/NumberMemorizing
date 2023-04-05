@@ -19,7 +19,7 @@ class SettingsViewController: UIViewController {
     configView()
   }
   
-  @objc func restoreInitialNumbers() {
+  @objc private func restoreInitialNumbers() {
 
     let alertController = {
       let title = "Reset Numbers Plist"

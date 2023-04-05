@@ -16,7 +16,7 @@ class NumberChangeViewController: UIViewController {
   var item: Item?
   var delegate: NumberChangeViewControllerDelegate?
   
-  var selectedPicture: UIImage?
+  private var selectedPicture: UIImage?
 
   lazy private var numberTextField: UITextField = {
     let numberTextField = MyUI.configTextField(placeholder: "Enter a new number")
@@ -52,7 +52,7 @@ class NumberChangeViewController: UIViewController {
     MyUI.configTapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
   }()
   
-  var textFields = [UITextField]()
+  private var textFields = [UITextField]()
   
   lazy private var myNavigationItem: UINavigationItem = {
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))

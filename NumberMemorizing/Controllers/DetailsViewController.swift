@@ -59,7 +59,7 @@ class DetailsViewController: UIViewController {
     changeVC.modalPresentationStyle = .fullScreen
   }
   
-  func configView() {
+  private func configView() {
     view.addSubview(stackView)
     
     stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +71,7 @@ class DetailsViewController: UIViewController {
     ])
   }
   
-  func updateView() {
+  private func updateView() {
 //    guard numberLabel != nil else { return }
 //    guard lettersLabel != nil else { return }
 //    guard wordLabel != nil else { return }

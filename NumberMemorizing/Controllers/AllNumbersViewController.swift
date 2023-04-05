@@ -17,7 +17,7 @@ class AllNumbersViewController: UIViewController {
     return tableView
   }()
   
-  var itemStore = ItemStore()
+  private var itemStore = ItemStore()
   
   override func viewDidLoad() {
     super.viewDidLoad()
