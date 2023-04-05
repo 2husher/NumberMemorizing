@@ -24,7 +24,12 @@ class NumberChangeViewController: UIViewController {
     numberTextField.tag = MyConstants.numberTextFieldTag
     return numberTextField
   }()
-  
+
+  // TODO: scroll view for letters choices.
+//  lazy private var lettersLabel: UILabel! = {
+//    MyUI.configLabel(text: item.letters)
+//  }()
+
   lazy private var lettersTextField: UITextField = {
     let lettersTextField = MyUI.configTextField(placeholder: "Enter the letters")
     lettersTextField.delegate = self
@@ -164,15 +169,24 @@ extension NumberChangeViewController: UITextFieldDelegate {
 
     if isQuantityOfDigitsInNumberMoreThanLimit(textField: textField, text: newText) { return false }
 
+    if !onlyDigitsEnteredForNumber(textField: textField, text: newText) { return false }
+
+
     myNavigationItem.rightBarButtonItem?.isEnabled = allTextFieldsFilled(currentTextField: textField) && !newText.isEmpty
     return true
   }
 
   // MARK: - Helper Methods
+  private func onlyDigitsEnteredForNumber(textField: UITextField, text: String) -> Bool {
+    if textField.tag == MyConstants.numberTextFieldTag {
+      return text.filter { $0.isNumber } == text
+    }
+    return true
+  }
+
   private func isQuantityOfDigitsInNumberMoreThanLimit(textField: UITextField, text: String) -> Bool {
     let maxQuantityDigitsInNumber = 8
     if textField.tag == MyConstants.numberTextFieldTag, text.count > maxQuantityDigitsInNumber {
-      print("In number text field")
       return true
     }
     return false
