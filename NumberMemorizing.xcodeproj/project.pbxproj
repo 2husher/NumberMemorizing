@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FAB78EFC29DDD6B1002AD949 /* DigitsLettersStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB78EFB29DDD6B1002AD949 /* DigitsLettersStore.swift */; };
 		FABB606829DC0CB000DC9A41 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB606729DC0CB000DC9A41 /* SettingsViewController.swift */; };
 		FABB606C29DC21EE00DC9A41 /* InitialNumbers.plist in Resources */ = {isa = PBXBuildFile; fileRef = FABB606B29DC21EE00DC9A41 /* InitialNumbers.plist */; };
 		FABECCA529D319320033B356 /* MyIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABECCA429D319320033B356 /* MyIO.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FAB78EFB29DDD6B1002AD949 /* DigitsLettersStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsLettersStore.swift; sourceTree = "<group>"; };
 		FABB606729DC0CB000DC9A41 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FABB606B29DC21EE00DC9A41 /* InitialNumbers.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = InitialNumbers.plist; sourceTree = "<group>"; };
 		FABECCA429D319320033B356 /* MyIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIO.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			children = (
 				FAC26BB329B4D55400223B1A /* Item.swift */,
 				FAC0727F29B9009B00D79ACF /* ItemStore.swift */,
+				FAB78EFB29DDD6B1002AD949 /* DigitsLettersStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC62B8129AF9DC1005D9392 /* AppDelegate.swift in Sources */,
+				FAB78EFC29DDD6B1002AD949 /* DigitsLettersStore.swift in Sources */,
 				FAC4B96A29B37FBD00B90535 /* CustomTableViewCell.swift in Sources */,
 				FAC26BB429B4D55400223B1A /* Item.swift in Sources */,
 				FAC26BAF29B4D34400223B1A /* MyUI.swift in Sources */,
