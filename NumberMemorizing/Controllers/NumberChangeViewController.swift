@@ -18,6 +18,7 @@ class NumberChangeViewController: UIViewController {
 
   private var childNumberViewController: EmbeddedNumberViewController!
   private var childWordViewController: EmbeddedWordViewController!
+  private var childImageViewController: EmbeddedImageViewController!
   
   private var selectedPicture: UIImage?
 
@@ -36,15 +37,7 @@ class NumberChangeViewController: UIViewController {
     MyUI.configButton(title: "Select letters", target: self, action: #selector(selectLetters))
   }()
   
-  lazy private var selectedPictureButton: UIButton = {
-    MyUI.configButton(title: "Select a picture", target: self, action: #selector(pickPhoto))
-  }()
-  
   private var stackView: UIStackView!
-
-  lazy private var imageView: UIImageView = {
-    MyUI.configImageView(image: item?.picture ?? UIImage(named: "default"))
-  }()
   
   lazy private var tapGestureRecognizer: UITapGestureRecognizer = {
     MyUI.configTapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -99,26 +92,27 @@ class NumberChangeViewController: UIViewController {
     _ = myNavigationItem.title
 
     childWordViewController = EmbeddedWordViewController()
-    addChild(childWordViewController)
     childNumberViewController = EmbeddedNumberViewController()
-    addChild(childNumberViewController)
+    childImageViewController = EmbeddedImageViewController()
 
+    addChild(childWordViewController)
+    addChild(childNumberViewController)
+    addChild(childImageViewController)
 
     stackView =  MyUI.configStackView(arrangedSubviews: [
       childNumberViewController.view,
 //      lettersLabel,
 //      selectLettersButton,
       //      lettersTextField,
-      //      wordTextField,
       childWordViewController.view,
-//      imageView,
-//      selectedPictureButton
+      childImageViewController.view
     ])
     
     view.addSubview(stackView)
 
     childNumberViewController.didMove(toParent: self)
     childWordViewController.didMove(toParent: self)
+    childImageViewController.didMove(toParent: self)
   }
 
 
@@ -128,7 +122,6 @@ class NumberChangeViewController: UIViewController {
       stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
       stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 20),
       stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20)//,
-//      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
     ])
   }
 
@@ -194,60 +187,3 @@ extension NumberChangeViewController: UITextFieldDelegate {
   }
 }
 
-extension NumberChangeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  // MARK: - Image Helper Methods
-  private func takePhotoWithCamera() {
-    let imagePicker = UIImagePickerController()
-    imagePicker.sourceType = .camera
-    imagePicker.delegate = self
-    imagePicker.allowsEditing = true
-    present(imagePicker, animated: true)
-  }
-  
-  private func choosePhotoFromLibrary() {
-    let imagePicker = UIImagePickerController()
-    imagePicker.sourceType = .photoLibrary
-    imagePicker.delegate = self
-    imagePicker.allowsEditing = true
-    present(imagePicker, animated: true)
-  }
-  
-  @objc private func pickPhoto() {
-    if UIImagePickerController.isSourceTypeAvailable(.camera) {
-      showPhotoMenu()
-    }
-    else {
-      choosePhotoFromLibrary()
-    }
-  }
-  
-  private func showPhotoMenu() {
-    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    
-    let actCancel = UIAlertAction(title: "Cancel", style: .cancel)
-    alert.addAction(actCancel)
-    
-    let actPhoto = UIAlertAction(title: "Take photo", style: .default) { _ in
-      self.takePhotoWithCamera()
-    }
-    alert.addAction(actPhoto)
-    
-    let actLibrary = UIAlertAction(title: "Choose from library", style: .default) { _ in
-      self.choosePhotoFromLibrary()
-    }
-    alert.addAction(actLibrary)
-    
-    present(alert, animated: true)
-  }
-  
-  // MARK: - Image Picker Delegate Methods
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    selectedPicture = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-    imageView.image = selectedPicture
-    dismiss(animated: true)
-  }
-  
-  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    dismiss(animated: true)
-  }
-}
