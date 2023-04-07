@@ -16,16 +16,10 @@ class NumberChangeViewController: UIViewController {
   var item: Item?
   var delegate: NumberChangeViewControllerDelegate?
 
+  private var childNumberViewController: EmbeddedNumberViewController!
   private var childWordViewController: EmbeddedWordViewController!
   
   private var selectedPicture: UIImage?
-
-  lazy private var numberTextField: UITextField = {
-    let numberTextField = MyUI.configTextField(placeholder: "Enter a new number")
-    numberTextField.delegate = self
-    numberTextField.tag = MyConstants.numberTextFieldTag
-    return numberTextField
-  }()
 
   // TODO: scroll view for letters choices.
   lazy private var lettersLabel: UILabel! = {
@@ -87,12 +81,12 @@ class NumberChangeViewController: UIViewController {
   
   private func configView() {
     if let item = item {
-      numberTextField.text = String(item.numberValue)
+//      numberTextField.text = String(item.numberValue)
       lettersTextField.text = item.letters
 //      childWordViewController.wordTextField.text = item.word
     }
     
-    textFields.append(numberTextField)
+//    textFields.append(numberTextField)
     textFields.append(lettersTextField)
 //    textFields.append(childWordViewController.wordTextField)
     textFields.forEach { $0.clearButtonMode = .whileEditing }
@@ -106,9 +100,12 @@ class NumberChangeViewController: UIViewController {
 
     childWordViewController = EmbeddedWordViewController()
     addChild(childWordViewController)
+    childNumberViewController = EmbeddedNumberViewController()
+    addChild(childNumberViewController)
+
 
     stackView =  MyUI.configStackView(arrangedSubviews: [
-//      numberTextField,
+      childNumberViewController.view,
 //      lettersLabel,
 //      selectLettersButton,
       //      lettersTextField,
@@ -120,6 +117,7 @@ class NumberChangeViewController: UIViewController {
     
     view.addSubview(stackView)
 
+    childNumberViewController.didMove(toParent: self)
     childWordViewController.didMove(toParent: self)
   }
 
@@ -139,7 +137,7 @@ class NumberChangeViewController: UIViewController {
   }
 
   @objc private func done() {
-    let numberText = numberTextField.text!
+    let numberText = childNumberViewController.numberTextField.text!
     let lettersText = lettersTextField.text!
     let wordText = childWordViewController.wordTextField.text!
 
@@ -175,49 +173,16 @@ class NumberChangeViewController: UIViewController {
 }
 
 // MARK: - TextField Delegate Methods
-extension NumberChangeViewController: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-  }
-  
-  func textFieldShouldClear(_ textField: UITextField) -> Bool {
-    myNavigationItem.rightBarButtonItem?.isEnabled = false
-    return true
-  }
-  
+extension NumberChangeViewController: UITextFieldDelegate {  
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    let oldText = textField.text!
-    let newText = oldText.replacingCharacters(in: Range(range, in: oldText)!, with: string)
 
-    if isQuantityOfDigitsInNumberMoreThanLimit(textField: textField, text: newText) { return false }
-
-    if !onlyDigitsEnteredForNumber(textField: textField, text: newText) { return false }
-
-    if textField.tag == MyConstants.numberTextFieldTag {
-      lettersLabel.text = newText
-
-    }
-
-
-    myNavigationItem.rightBarButtonItem?.isEnabled = allTextFieldsFilled(currentTextField: textField) && !newText.isEmpty
+//    myNavigationItem.rightBarButtonItem?.isEnabled = allTextFieldsFilled(currentTextField: textField) && !newText.isEmpty
     return true
   }
 
   // MARK: - TextField Helper Methods
-  private func onlyDigitsEnteredForNumber(textField: UITextField, text: String) -> Bool {
-    if textField.tag == MyConstants.numberTextFieldTag {
-      return text.filter { $0.isNumber } == text
-    }
-    return true
-  }
 
-  private func isQuantityOfDigitsInNumberMoreThanLimit(textField: UITextField, text: String) -> Bool {
-    let maxQuantityDigitsInNumber = 8
-    if textField.tag == MyConstants.numberTextFieldTag, text.count > maxQuantityDigitsInNumber {
-      return true
-    }
-    return false
-  }
+
 
   private func allTextFieldsFilled(currentTextField: UITextField) -> Bool {
     for field in self.textFields {
