@@ -15,6 +15,8 @@ class NumberChangeViewController: UIViewController {
   
   var item: Item?
   var delegate: NumberChangeViewControllerDelegate?
+
+  private var childWordViewController: EmbeddedWordViewController!
   
   private var selectedPicture: UIImage?
 
@@ -36,20 +38,16 @@ class NumberChangeViewController: UIViewController {
     return lettersTextField
   }()
   
-  lazy private var wordTextField: UITextField = {
-    let wordTextField = MyUI.configTextField(placeholder: "Enter the word")
-    wordTextField.delegate = self
-    return wordTextField
+  lazy private var selectLettersButton: UIButton = {
+    MyUI.configButton(title: "Select letters", target: self, action: #selector(selectLetters))
   }()
   
   lazy private var selectedPictureButton: UIButton = {
     MyUI.configButton(title: "Select a picture", target: self, action: #selector(pickPhoto))
   }()
   
-  lazy private var stackView: UIStackView = {
-    MyUI.configStackView(arrangedSubviews: [numberTextField, lettersLabel, lettersTextField, wordTextField, imageView, selectedPictureButton])
-  }()
-  
+  private var stackView: UIStackView!
+
   lazy private var imageView: UIImageView = {
     MyUI.configImageView(image: item?.picture ?? UIImage(named: "default"))
   }()
@@ -77,6 +75,7 @@ class NumberChangeViewController: UIViewController {
     super.viewDidLoad()
     
     configView()
+    configViewsConstraints()
   }
    
   
@@ -90,36 +89,59 @@ class NumberChangeViewController: UIViewController {
     if let item = item {
       numberTextField.text = String(item.numberValue)
       lettersTextField.text = item.letters
-      wordTextField.text = item.word
+//      childWordViewController.wordTextField.text = item.word
     }
     
     textFields.append(numberTextField)
     textFields.append(lettersTextField)
-    textFields.append(wordTextField)
+//    textFields.append(childWordViewController.wordTextField)
     textFields.forEach { $0.clearButtonMode = .whileEditing }
     
     view.backgroundColor = .white
     
     view.addGestureRecognizer(tapGestureRecognizer)
     
-        
+
     _ = myNavigationItem.title
+
+    childWordViewController = EmbeddedWordViewController()
+    addChild(childWordViewController)
+
+    stackView =  MyUI.configStackView(arrangedSubviews: [
+//      numberTextField,
+//      lettersLabel,
+//      selectLettersButton,
+      //      lettersTextField,
+      //      wordTextField,
+      childWordViewController.view,
+//      imageView,
+//      selectedPictureButton
+    ])
     
     view.addSubview(stackView)
-    
+
+    childWordViewController.didMove(toParent: self)
+  }
+
+
+  private func configViewsConstraints() {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
       stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 20),
-      stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20),
-      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
+      stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20)//,
+//      imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
     ])
   }
- 
+
+  @objc private func selectLetters() {
+
+  }
+
   @objc private func done() {
     let numberText = numberTextField.text!
     let lettersText = lettersTextField.text!
-    let wordText = wordTextField.text!
+    let wordText = childWordViewController.wordTextField.text!
 
     guard !numberText.isEmpty else { return }
     guard let numberValue = Int(numberText) else { return }
@@ -173,6 +195,7 @@ extension NumberChangeViewController: UITextFieldDelegate {
 
     if textField.tag == MyConstants.numberTextFieldTag {
       lettersLabel.text = newText
+
     }
 
 
@@ -180,7 +203,7 @@ extension NumberChangeViewController: UITextFieldDelegate {
     return true
   }
 
-  // MARK: - Helper Methods
+  // MARK: - TextField Helper Methods
   private func onlyDigitsEnteredForNumber(textField: UITextField, text: String) -> Bool {
     if textField.tag == MyConstants.numberTextFieldTag {
       return text.filter { $0.isNumber } == text

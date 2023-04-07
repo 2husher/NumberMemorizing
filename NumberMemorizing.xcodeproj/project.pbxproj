@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FAB78EFC29DDD6B1002AD949 /* DigitsLettersStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB78EFB29DDD6B1002AD949 /* DigitsLettersStore.swift */; };
+		FABB369029E0484E00D69D63 /* EmbeddedWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB368F29E0484E00D69D63 /* EmbeddedWordViewController.swift */; };
 		FABB606829DC0CB000DC9A41 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB606729DC0CB000DC9A41 /* SettingsViewController.swift */; };
 		FABB606C29DC21EE00DC9A41 /* InitialNumbers.plist in Resources */ = {isa = PBXBuildFile; fileRef = FABB606B29DC21EE00DC9A41 /* InitialNumbers.plist */; };
 		FABECCA529D319320033B356 /* MyIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABECCA429D319320033B356 /* MyIO.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		FAB78EFB29DDD6B1002AD949 /* DigitsLettersStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsLettersStore.swift; sourceTree = "<group>"; };
+		FABB368F29E0484E00D69D63 /* EmbeddedWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedWordViewController.swift; sourceTree = "<group>"; };
 		FABB606729DC0CB000DC9A41 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FABB606B29DC21EE00DC9A41 /* InitialNumbers.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = InitialNumbers.plist; sourceTree = "<group>"; };
 		FABECCA429D319320033B356 /* MyIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIO.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				FAC0727D29B8A98900D79ACF /* NumberChangeViewController.swift */,
 				FAC4B96E29B398BA00B90535 /* DetailsViewController.swift */,
 				FABB606729DC0CB000DC9A41 /* SettingsViewController.swift */,
+				FABB368F29E0484E00D69D63 /* EmbeddedWordViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				FAC0727E29B8A98900D79ACF /* NumberChangeViewController.swift in Sources */,
 				FAC62B8329AF9DC1005D9392 /* SceneDelegate.swift in Sources */,
 				FAC0728029B9009B00D79ACF /* ItemStore.swift in Sources */,
+				FABB369029E0484E00D69D63 /* EmbeddedWordViewController.swift in Sources */,
 				FAC62B8B29AF9DC1005D9392 /* NumberMemorizing.xcdatamodeld in Sources */,
 				FAC26BB129B4D3CE00223B1A /* MyConstants.swift in Sources */,
 				FAC3060D29B2BE05002A7BF9 /* AllNumbersViewController.swift in Sources */,
