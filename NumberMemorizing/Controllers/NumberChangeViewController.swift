@@ -19,6 +19,7 @@ class NumberChangeViewController: UIViewController {
   private var childNumberViewController: EmbeddedNumberViewController!
   private var childWordViewController: EmbeddedWordViewController!
   private var childImageViewController: EmbeddedImageViewController!
+  private var childTableViewController: EmbeddedTableViewController!
   
   private var selectedPicture: UIImage?
 
@@ -94,16 +95,19 @@ class NumberChangeViewController: UIViewController {
     childWordViewController = EmbeddedWordViewController()
     childNumberViewController = EmbeddedNumberViewController()
     childImageViewController = EmbeddedImageViewController()
+    childTableViewController = EmbeddedTableViewController()
 
     addChild(childWordViewController)
     addChild(childNumberViewController)
     addChild(childImageViewController)
+    addChild(childTableViewController)
 
     stackView =  MyUI.configStackView(arrangedSubviews: [
       childNumberViewController.view,
 //      lettersLabel,
 //      selectLettersButton,
       //      lettersTextField,
+      childTableViewController.view,
       childWordViewController.view,
       childImageViewController.view
     ])
@@ -111,17 +115,19 @@ class NumberChangeViewController: UIViewController {
     view.addSubview(stackView)
 
     childNumberViewController.didMove(toParent: self)
+    childTableViewController.didMove(toParent: self)
     childWordViewController.didMove(toParent: self)
     childImageViewController.didMove(toParent: self)
   }
-
 
   private func configViewsConstraints() {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
       stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 20),
-      stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20)//,
+      stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20),
+      stackView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 20)//,
+//      childTableViewController.tableView.heightAnchor.constraint(equalTo: childImageViewController.imageView.heightAnchor)
     ])
   }
 
