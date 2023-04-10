@@ -17,7 +17,7 @@ class ItemStore {
   
   var items: [Item] = []
   
-  func removeItem(_ item: Item) {
+  func remove(item: Item) {
     let index = items.firstIndex(of: item)
     if let index = index {
       items.remove(at: index)
@@ -36,19 +36,19 @@ class ItemStore {
     }
   }
   
-  func addItem(_ item: Item) {
+  func add(item: Item) {
     items.append(item)
   }
   
-  func saveItem(_ item: Item) {
+  func save(item: Item) {
     var numbers = [Number]()
     for item in items {
       let number = Number(numberValue: item.numberValue, letters: item.letters, word: item.word, pictureID: item.pictureID)
       numbers.append(number)
     }
-    saveNumbers(numbers)
+    save(numbers: numbers)
     if let picture = item.picture {
-      savePicture(picture, to: item.pictureURL)
+      save(picture: picture, to: item.pictureURL)
     }
   }
   
@@ -65,7 +65,7 @@ class ItemStore {
   }
   
   // MARK: - Helper Methods
-  private func saveNumbers(_ numbers: [Number]) {
+  private func save(numbers: [Number]) {
     let encoder = PropertyListEncoder()
     do {
       let data = try encoder.encode(numbers)
@@ -89,7 +89,7 @@ class ItemStore {
     return numbers
   }
 
-  private func savePicture(_ picture: UIImage, to pictureURL: URL ) {
+  private func save(picture: UIImage, to pictureURL: URL ) {
     if let data = picture.jpegData(compressionQuality: 0.5) {
       do {
         try data.write(to: pictureURL, options: .atomic)

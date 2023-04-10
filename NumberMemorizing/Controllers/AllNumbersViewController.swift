@@ -90,9 +90,9 @@ extension AllNumbersViewController: UITableViewDataSource {
         ac.addAction(cancelAction)
         
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
-          self.itemStore.removeItem(item)
+          self.itemStore.remove(item: item)
           self.tableView.deleteRows(at: [indexPath], with: .automatic)
-          self.itemStore.saveItem(item)
+          self.itemStore.save(item: item)
         })
         ac.addAction(deleteAction)
         return ac
@@ -103,7 +103,7 @@ extension AllNumbersViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     if let item = itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row) {
-      itemStore.saveItem(item)
+      itemStore.save(item: item)
     }
   }
   
@@ -115,8 +115,8 @@ extension AllNumbersViewController: UITableViewDataSource {
 // MARK: - Number Change View Delegate Methods
 extension AllNumbersViewController: NumberChangeViewControllerDelegate {
   func numberChangeViewControllerChanged(item: Item) {
-    itemStore.addItem(item)
-    itemStore.saveItem(item)
+    itemStore.add(item: item)
+    itemStore.save(item: item)
     tableView.reloadData()
   }
 }
@@ -124,7 +124,7 @@ extension AllNumbersViewController: NumberChangeViewControllerDelegate {
 // MARK: - Details View Controller Delegate Methods
 extension AllNumbersViewController: DetailsViewControllerDelegate {
   func detailsViewControllerChanged(item: Item) {
-    itemStore.saveItem(item)
+    itemStore.save(item: item)
     tableView.reloadData()
   }
 }
