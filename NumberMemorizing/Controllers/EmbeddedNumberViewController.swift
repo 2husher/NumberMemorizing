@@ -12,11 +12,17 @@ class EmbeddedNumberViewController: UIViewController {
   private var numberLabel: UILabel!
   private var stackView: UIStackView!
 
+  private var childDataPickerVC: EmbeddedDataPickerViewController!
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     configViews()
     configViewsConstraints()
+
+    if let parent = parent as? NumberChangeViewController {
+      childDataPickerVC = parent.childDataPickerViewController
+    }
   }
 
   private func configViews() {
@@ -63,6 +69,8 @@ extension EmbeddedNumberViewController: UITextFieldDelegate {
     if !onlyDigitsEnteredForNumber(number: newText) { return false }
 
     if isQuantityOfDigitsInNumberMoreThanLimit(number: newText) { return false }
+
+    childDataPickerVC.numberStr = newText
 
     return true
   }

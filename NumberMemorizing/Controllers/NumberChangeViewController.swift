@@ -16,10 +16,10 @@ class NumberChangeViewController: UIViewController {
   var item: Item?
   var delegate: NumberChangeViewControllerDelegate?
 
-  private var childNumberViewController: EmbeddedNumberViewController!
-  private var childWordViewController: EmbeddedWordViewController!
-  private var childImageViewController: EmbeddedImageViewController!
-  private var childDataPickerViewController: EmbeddedDataPickerViewController!
+  var childNumberViewController: EmbeddedNumberViewController!
+  var childWordViewController: EmbeddedWordViewController!
+  var childImageViewController: EmbeddedImageViewController!
+  var childDataPickerViewController: EmbeddedDataPickerViewController!
   
   private var selectedPicture: UIImage?
 
@@ -125,8 +125,8 @@ class NumberChangeViewController: UIViewController {
     NSLayoutConstraint.activate([
       stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
       stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 20),
-      stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20),
-      stackView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 20)//,
+      stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -20)//,
+//      stackView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 20)//,
 //      childTableViewController.tableView.heightAnchor.constraint(equalTo: childImageViewController.imageView.heightAnchor)
     ])
   }

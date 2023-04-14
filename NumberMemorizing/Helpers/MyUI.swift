@@ -61,4 +61,12 @@ class MyUI {
     chooseImageButton.addTarget(target, action: action, for: controlEvents)
     return chooseImageButton
   }
+
+  class func configDataPicker() -> UIPickerView {
+    let dataPicker = UIPickerView(frame: CGRect.zero)
+    dataPicker.layer.borderColor = UIColor.lightGray.cgColor
+    dataPicker.layer.borderWidth = 1
+    dataPicker.layer.cornerRadius = 5
+    return dataPicker
+  }
 }
