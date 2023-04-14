@@ -19,7 +19,7 @@ class NumberChangeViewController: UIViewController {
   private var childNumberViewController: EmbeddedNumberViewController!
   private var childWordViewController: EmbeddedWordViewController!
   private var childImageViewController: EmbeddedImageViewController!
-  private var childTableViewController: EmbeddedTableViewController!
+  private var childDataPickerViewController: EmbeddedDataPickerViewController!
   
   private var selectedPicture: UIImage?
 
@@ -95,19 +95,19 @@ class NumberChangeViewController: UIViewController {
     childWordViewController = EmbeddedWordViewController()
     childNumberViewController = EmbeddedNumberViewController()
     childImageViewController = EmbeddedImageViewController()
-    childTableViewController = EmbeddedTableViewController()
+    childDataPickerViewController = EmbeddedDataPickerViewController()
 
     addChild(childWordViewController)
     addChild(childNumberViewController)
     addChild(childImageViewController)
-    addChild(childTableViewController)
+    addChild(childDataPickerViewController)
 
     stackView =  MyUI.configStackView(arrangedSubviews: [
       childNumberViewController.view,
 //      lettersLabel,
 //      selectLettersButton,
       //      lettersTextField,
-      childTableViewController.view,
+      childDataPickerViewController.view,
       childWordViewController.view,
       childImageViewController.view
     ])
@@ -115,7 +115,7 @@ class NumberChangeViewController: UIViewController {
     view.addSubview(stackView)
 
     childNumberViewController.didMove(toParent: self)
-    childTableViewController.didMove(toParent: self)
+    childDataPickerViewController.didMove(toParent: self)
     childWordViewController.didMove(toParent: self)
     childImageViewController.didMove(toParent: self)
   }

@@ -28,6 +28,7 @@
 		FAC62B8B29AF9DC1005D9392 /* NumberMemorizing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAC62B8929AF9DC1005D9392 /* NumberMemorizing.xcdatamodeld */; };
 		FAC62B8D29AF9DC1005D9392 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC62B8C29AF9DC1005D9392 /* Assets.xcassets */; };
 		FAC62B9029AF9DC1005D9392 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC62B8E29AF9DC1005D9392 /* LaunchScreen.storyboard */; };
+		FAD9B18729E566F0008CBFCE /* EmbeddedDataPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD9B18629E566F0008CBFCE /* EmbeddedDataPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		FAC62B8C29AF9DC1005D9392 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAC62B8F29AF9DC1005D9392 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAC62B9129AF9DC1005D9392 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAD9B18629E566F0008CBFCE /* EmbeddedDataPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedDataPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				FABB369129E0543400D69D63 /* EmbeddedNumberViewController.swift */,
 				FABB369329E05D2800D69D63 /* EmbeddedImageViewController.swift */,
 				FABB369529E07B6500D69D63 /* EmbeddedTableViewController.swift */,
+				FAD9B18629E566F0008CBFCE /* EmbeddedDataPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				FABB369229E0543400D69D63 /* EmbeddedNumberViewController.swift in Sources */,
 				FAC3060D29B2BE05002A7BF9 /* AllNumbersViewController.swift in Sources */,
 				FABB606829DC0CB000DC9A41 /* SettingsViewController.swift in Sources */,
+				FAD9B18729E566F0008CBFCE /* EmbeddedDataPickerViewController.swift in Sources */,
 				FAC4B96F29B398BA00B90535 /* DetailsViewController.swift in Sources */,
 				FABECCA529D319320033B356 /* MyIO.swift in Sources */,
 				FABB369629E07B6500D69D63 /* EmbeddedTableViewController.swift in Sources */,
