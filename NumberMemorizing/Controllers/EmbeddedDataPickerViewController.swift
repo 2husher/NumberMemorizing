@@ -16,16 +16,16 @@ class EmbeddedDataPickerViewController: UIViewController {
     MyUI.configLabel(text: "Letters for the number")
   }()
 
-
-  var numberStr = "" {
+  var numberValue: Int? {
     didSet {
+      selectedLetters = numberValue?.firstLetters ?? []
       dataPicker.reloadAllComponents()
     }
   }
 
-  var label = UILabel()
+  var selectedLetters: [String] = [] 
 
-  var letters = [[String]]()
+  var label = UILabel()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,7 +61,8 @@ class EmbeddedDataPickerViewController: UIViewController {
 extension EmbeddedDataPickerViewController: UIPickerViewDataSource
 {
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    numberStr.count
+    guard let numberValue = numberValue else { return 0 }
+    return numberValue.len
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -72,15 +73,31 @@ extension EmbeddedDataPickerViewController: UIPickerViewDataSource
 // MARK: - Picker Delegate Methods
 extension EmbeddedDataPickerViewController: UIPickerViewDelegate {
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    numberStr.map { String($0) }[component]
+    guard let numberValue = numberValue else { return nil }
+    switch row {
+    case 0:
+      return numberValue.firstLetters[component]
+    case 1:
+      return numberValue.secondLetters[component]
+    default:
+      fatalError("Wrong case variant.")
+    }
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    var output = ""
-    for i in 0 ..< numberStr.count {
+    guard let numberValue = numberValue else { return }
+    selectedLetters.removeAll()
+    for i in 0 ..< numberValue.len {
       let row = dataPicker.selectedRow(inComponent: i)
-      output += numberStr.map { String($0) }[i]
+      switch row {
+      case 0:
+        selectedLetters.append(numberValue.firstLetters[i])
+      case 1:
+        selectedLetters.append(numberValue.secondLetters[i])
+      default:
+        fatalError("Wrong case variant.")
+      }
     }
-    print(output)
+    print(selectedLetters.joined())
   }
 }

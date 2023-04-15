@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FAB78EFC29DDD6B1002AD949 /* DigitsLettersStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB78EFB29DDD6B1002AD949 /* DigitsLettersStore.swift */; };
+		FAB78EFC29DDD6B1002AD949 /* DigitsLettersMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB78EFB29DDD6B1002AD949 /* DigitsLettersMapping.swift */; };
+		FABA938C29EA9C5F005CEFFA /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA938B29EA9C5F005CEFFA /* Int.swift */; };
 		FABB369029E0484E00D69D63 /* EmbeddedWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB368F29E0484E00D69D63 /* EmbeddedWordViewController.swift */; };
 		FABB369229E0543400D69D63 /* EmbeddedNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB369129E0543400D69D63 /* EmbeddedNumberViewController.swift */; };
 		FABB369429E05D2800D69D63 /* EmbeddedImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABB369329E05D2800D69D63 /* EmbeddedImageViewController.swift */; };
@@ -32,7 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FAB78EFB29DDD6B1002AD949 /* DigitsLettersStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsLettersStore.swift; sourceTree = "<group>"; };
+		FAB78EFB29DDD6B1002AD949 /* DigitsLettersMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsLettersMapping.swift; sourceTree = "<group>"; };
+		FABA938B29EA9C5F005CEFFA /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		FABB368F29E0484E00D69D63 /* EmbeddedWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedWordViewController.swift; sourceTree = "<group>"; };
 		FABB369129E0543400D69D63 /* EmbeddedNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedNumberViewController.swift; sourceTree = "<group>"; };
 		FABB369329E05D2800D69D63 /* EmbeddedImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedImageViewController.swift; sourceTree = "<group>"; };
@@ -84,7 +86,8 @@
 			children = (
 				FAC26BB329B4D55400223B1A /* Item.swift */,
 				FAC0727F29B9009B00D79ACF /* ItemStore.swift */,
-				FAB78EFB29DDD6B1002AD949 /* DigitsLettersStore.swift */,
+				FAB78EFB29DDD6B1002AD949 /* DigitsLettersMapping.swift */,
+				FABA938B29EA9C5F005CEFFA /* Int.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -228,11 +231,12 @@
 			files = (
 				FAC62B8129AF9DC1005D9392 /* AppDelegate.swift in Sources */,
 				FABB369429E05D2800D69D63 /* EmbeddedImageViewController.swift in Sources */,
-				FAB78EFC29DDD6B1002AD949 /* DigitsLettersStore.swift in Sources */,
+				FAB78EFC29DDD6B1002AD949 /* DigitsLettersMapping.swift in Sources */,
 				FAC4B96A29B37FBD00B90535 /* CustomTableViewCell.swift in Sources */,
 				FAC26BB429B4D55400223B1A /* Item.swift in Sources */,
 				FAC26BAF29B4D34400223B1A /* MyUI.swift in Sources */,
 				FAC0727E29B8A98900D79ACF /* NumberChangeViewController.swift in Sources */,
+				FABA938C29EA9C5F005CEFFA /* Int.swift in Sources */,
 				FAC62B8329AF9DC1005D9392 /* SceneDelegate.swift in Sources */,
 				FAC0728029B9009B00D79ACF /* ItemStore.swift in Sources */,
 				FABB369029E0484E00D69D63 /* EmbeddedWordViewController.swift in Sources */,

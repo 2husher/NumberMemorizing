@@ -16,6 +16,12 @@ class NumberChangeViewController: UIViewController {
   var item: Item?
   var delegate: NumberChangeViewControllerDelegate?
 
+  var numberValue: Int? {
+    didSet {
+      childDataPickerViewController.numberValue = numberValue
+    }
+  }
+
   var childNumberViewController: EmbeddedNumberViewController!
   var childWordViewController: EmbeddedWordViewController!
   var childImageViewController: EmbeddedImageViewController!
